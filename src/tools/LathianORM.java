@@ -127,6 +127,10 @@ public class LathianORM {
             Regions regs = (Regions) object;
             System.out.println(regs.getRegionName());
         }
+        
+        /**
+         * menampilan semua nama depatments
+         */
 
         System.out.println("");
         System.out.println("Menampilkan Semua Nama Departments");
