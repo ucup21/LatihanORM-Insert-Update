@@ -131,7 +131,6 @@ public class LathianORM {
       for (Object object : data) {
           Regions regs = (Regions) object;
           System.out.println(regs.getRegionName());
-        
     }
     }
 }
