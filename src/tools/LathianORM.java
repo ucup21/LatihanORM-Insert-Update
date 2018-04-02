@@ -152,6 +152,7 @@ public class LathianORM {
             System.out.println(coun.getCountryId() +" "+ coun.getCountryName());
         }
         
+        
         ////////////////////////////////////////////////////////////////////////////////////////////
         
         //LOCATIONS
