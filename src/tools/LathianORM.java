@@ -185,6 +185,23 @@ public class LathianORM {
         loc = new Locations((short)2100, "2121 Bwi");
        // loc.setcountryId(new Countries("IT"));
         System.out.println(new LocationsDAO().insert(loc));
+        
+        //SEARCH JOBS
+        System.out.println("Mencari Data Job");
+        List<Object> data1 = new JobsDAO().getAll();
+        data = new JobsDAO().search("jobId", "AD_PRES");
+        for (Object object : data1) {
+            Jobs j = (Jobs) object;
+            System.out.println("Pegawai dengan Job ID tersebut mempunyai Job Title : "+j.getJobTitle() + " dan Max Salary sebesar : " + j.getMaxSalary());
+        }
+        System.out.println("");
+    
+        
+        //UPDATE COUNTRIES
+         Countries co = (Countries) new CountriesDAO().getById("SG");
+        System.out.println("Country dengan ID tersebut adalah " + co.getCountryName());
+        co.setCountryName("Singapura");
+        System.out.println(new CountriesDAO().update(co));
 
     }
 }

@@ -119,4 +119,36 @@ public class CountriesDAO {
         }
         return data1;
     }
+        
+    /**
+     * fungsi insert untuk mengedit data pada tabel Countries
+     *
+     * @param object Object Berupa Kelas Countries
+     * @return mengembalikan nilai true jika berhasil mengupdate data
+     */
+    public boolean update(Object object) {
+        boolean b = false;
+        try {
+            session = factory.openSession();
+            transaction = session.beginTransaction();
+            Countries countries = (Countries) object;
+            Countries c = (Countries) session.get(Countries.class, countries.getCountryId());
+            c.setCountryName(countries.getCountryName());
+//            emp.setPhoneNumber(emp.getPhoneNumber());
+//            emp.setSalary(employees.getSalary());
+//            emp.setManagerId(employees.getManagerId());
+//            emp.setDepartmentId(employees.getDepartmentId());
+            session.update(c);
+            
+            b = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            session.close();
+        }
+        return b;
+    }
 }

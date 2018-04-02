@@ -6,6 +6,7 @@
 package dao;
 
 import entities.Jobs;
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -134,5 +135,29 @@ public class JobsDAO {
         return flag; 
     }
     
-    
+      /**
+     * fungsi Search untuk mencari data pada tabel Jobs
+     *
+     * @param object Object Berupa Kelas Jobs
+     * @return List data yang dicari dari kelas Jobs
+     */
+     public List<Object> search(String category, String search) {
+        List<Object> data = new ArrayList<>();
+
+        try {
+            session = factory.openSession();
+            transaction = session.beginTransaction();
+            data = session.createQuery("from Jobs where " + category + " like '%" + search + "%' ").list(); //list dari employees dibungkus dalam session lalu dimasukan kedalam data
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            session.close();
+        }
+        return data;
+    }
+
 }
