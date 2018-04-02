@@ -6,6 +6,7 @@
 package dao;
 
 import entities.Departments;
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -74,7 +75,20 @@ public class DepartmentsDAO implements InterfaceDAO{
 
     @Override
     public List<Object> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Object> data = new ArrayList<>();
+        try {
+            session = factory.openSession();
+            transaksi = session.beginTransaction();
+            data = session.createQuery("FROM Departments").list(); //list dibungkus oleh session dimasukan ke data
+            transaksi.commit(); //commit untuk menyimpan data ke database
+        } catch (Exception e) {
+            if (transaksi != null) 
+                transaksi.rollback();
+            
+        } finally {
+            session.close();
+        }
+        return data;
     }
 
     @Override
