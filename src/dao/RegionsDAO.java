@@ -7,6 +7,7 @@ package dao;
 
 import entities.Employees;
 import entities.Regions;
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -65,8 +66,22 @@ public class RegionsDAO implements InterfaceDAO{
 
     @Override
     public List<Object> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Object> data = new ArrayList<>();
+        try {
+            session = factory.openSession();
+            transaction = session.beginTransaction();
+            data = session.createQuery("FROM Regions").list();
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            session.close();
+        }
+        return data;
     }
+
 
     @Override
     public List<Object> search(String category, String search) {

@@ -117,8 +117,23 @@ public class LathianORM {
         Regions reg = (Regions) new RegionsDAO().getById("1");
         System.out.println(new RegionsDAO().delete(reg));
         
+          /*Insert Jobs
+        */
+        System.out.println("");
+        System.out.println("Menambahkan data Table Jobs");
+        Jobs jbs = new Jobs ("AD_PRE","President");
+        System.out.println(new JobsDAO().insert(jbs));
+        
+          /*GetAll Regions
+        */
+   System.out.println("Menampilkan semua data Region");
+   List<Object> data = new RegionsDAO().getAll();
+      for (Object object : data) {
+          Regions regs = (Regions) object;
+          System.out.println(regs.getRegionName());
         
     }
     }
+}
     
 

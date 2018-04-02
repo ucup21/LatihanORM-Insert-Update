@@ -85,4 +85,30 @@ public class JobsDAO {
         } return flag;
     }
     
+      /**
+     * Fungsi untuk menambahkan data pada tabel JOBS
+     
+     * @return flag
+     * /Insert berdasarkan Jobs Id
+      
+     */
+     public boolean insert(Object object) {
+     boolean flag = false;
+        try {
+            session = factory.openSession();
+            transaction = session.beginTransaction();
+            Jobs jbs = (Jobs) object;
+            session.save(jbs);
+            transaction.commit();
+            flag = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction!=null) transaction.rollback();
+        } finally {
+            session.close();
+        }
+        return flag;   
+    }
+    
+    
 }
