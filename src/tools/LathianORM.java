@@ -140,5 +140,16 @@ public class LathianORM {
             Departments dept = (Departments) depart; //casting
             System.out.println(dept.getDepartmentName());
         }
+        
+        /**
+         * delete from jobs
+         */
+        System.out.println(new JobsDAO().delete(1));
+        
+         /**
+         * searchById from Regions
+         */
+        Regions reg1 = (Regions) new RegionsDAO().getById("2");
+         System.out.println(reg1.getRegionName());
     }
 }

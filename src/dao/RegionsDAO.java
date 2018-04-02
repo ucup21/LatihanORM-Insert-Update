@@ -89,23 +89,50 @@ public class RegionsDAO implements InterfaceDAO{
     }
 
     
+//    @Override
+//    public Object getById(String id) {
+//        Object reg = new Object();
+//        try {
+//            session = factory.openSession();
+//            transaction = session.beginTransaction();
+//            reg = session
+//                    .createQuery("FROM Regions"
+//                            + " WHERE regionid="+id+"").uniqueResult();
+//            transaction.commit();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            if(transaction!=null)transaction.rollback();
+//        } finally {
+//            session.close();
+//        }
+//        return reg;
+//    }
+    
+    /**
+     * Fungsi untuk menampilkan Region berdasarkan Id
+     * @param id
+     * @return a
+     */
+    
     @Override
-    public Object getById(String id) {
-        Object reg = new Object();
+      public Object getById(String id) {
+        Object a = new Object();
         try {
-            session = factory.openSession();
-            transaction = session.beginTransaction();
-            reg = session
-                    .createQuery("FROM Regions"
-                            + " WHERE regionid="+id+"").uniqueResult();
-            transaction.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            if(transaction!=null)transaction.rollback();
-        } finally {
-            session.close();
+            session= factory.openSession(); 
+            transaction = session.beginTransaction(); 
+                    a= session.createQuery("FROM Regions WHERE regionId=:id ") 
+                    .setParameter("id", Integer.parseInt(id)).uniqueResult();
+                    transaction.commit(); 
+        } catch (Exception e) { 
+             e.printStackTrace();
+            if(transaction!=null)transaction.rollback(); 
         }
-        return reg;
+        finally{ 
+            session.close(); 
+        }
+        return a;
     }
+
+
     
 }
