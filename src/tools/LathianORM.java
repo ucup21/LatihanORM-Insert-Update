@@ -171,6 +171,20 @@ public class LathianORM {
          */
         Regions reg1 = (Regions) new RegionsDAO().getById("2");
          System.out.println(reg1.getRegionName());
+         
+        //GET ALL COUNTRIES
+        System.out.println("--- Menampilkan data pada Countries ---");
+        List<Object> datas1 = new CountriesDAO().getAll();
+        for (Object data1 : datas1) {
+            Countries cou = (Countries) data1;
+            System.out.println("Country ID : "+cou.getCountryId()+ ", Country Name : " +cou.getCountryName());
+        }
+        
+        //INSERT LOCATION
+        System.out.println("--- Insert data pada tabel Locations ---");
+        loc = new Locations((short)2100, "2121 Bwi");
+       // loc.setcountryId(new Countries("IT"));
+        System.out.println(new LocationsDAO().insert(loc));
 
     }
 }

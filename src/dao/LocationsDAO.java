@@ -28,7 +28,23 @@ public class LocationsDAO implements InterfaceDAO{
     }
     @Override
     public boolean insert(Object object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean flag = false;
+        try {
+            session = factory.openSession();
+            transaksi = session.beginTransaction();
+            Locations loc = (Locations) object;
+            session.save(loc);
+            transaksi.commit();
+            flag = true; //kenapa itdak di buat return? jika flag true maka catch tidak dijalankan
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaksi!=null) {
+                transaksi.rollback();
+            }
+        } finally {
+            session.close();
+        }
+        return flag;
     }
 
      /**
