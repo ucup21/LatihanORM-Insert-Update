@@ -5,7 +5,6 @@
  */
 package dao;
 
-import entities.Employees;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
