@@ -159,5 +159,17 @@ public class LathianORM {
         Locations locu = (Locations) new LocationsDAO().getById("1100");
         locu.setCity("Venice");
         System.out.println(new LocationsDAO().update(locu));
+
+        /**
+         * delete from jobs
+         */
+        System.out.println(new JobsDAO().delete(1));
+        
+         /**
+         * searchById from Regions
+         */
+        Regions reg1 = (Regions) new RegionsDAO().getById("2");
+         System.out.println(reg1.getRegionName());
+
     }
 }

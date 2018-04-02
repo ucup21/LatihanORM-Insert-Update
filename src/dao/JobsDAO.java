@@ -109,6 +109,30 @@ public class JobsDAO {
         }
         return flag;   
     }
+        
+     /**
+      * Fungsi untuk menghapus dari tabel Jobs
+      * @param object
+      * @return flag
+      */
+       public boolean delete(Object object) {
+        boolean flag = false;
+        try {
+            session= factory.openSession();
+            transaction = session.beginTransaction();
+            Jobs job =  (Jobs) session.get(Jobs.class, Integer.parseInt(object+""));
+            session.delete(job);
+            transaction.commit();
+            flag = true; 
+        } catch (Exception e) {
+             e.printStackTrace();
+            if(transaction!=null)transaction.rollback();
+        }
+        finally{
+            session.close();
+        }
+        return flag; 
+    }
     
     
 }
