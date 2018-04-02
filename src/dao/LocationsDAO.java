@@ -101,7 +101,18 @@ public class LocationsDAO implements InterfaceDAO{
 
     @Override
     public List<Object> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         List<Object> data = new ArrayList<>();
+        try {
+            session = factory.openSession();
+            transaksi =  session.beginTransaction();
+            data = session.createQuery("FROM Locations").list();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaksi != null) transaksi.rollback(); {
+                System.out.println();
+            }
+        } finally{ session.close();}
+        return data; 
     }
 
     @Override

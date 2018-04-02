@@ -224,5 +224,10 @@ public class LathianORM {
         Regions regs = (Regions) new RegionsDAO().getById("4");
         regs.setRegionName("Southeast Asia");
         System.out.println(new RegionsDAO().update(regs));
+        /*
+        Insert Department
+        */
+        Departments departments =  new Departments(Short.parseShort("105"), "Pemasaran");
+        System.out.println(new DepartmentsDAO().insert(departments));
 }
 }

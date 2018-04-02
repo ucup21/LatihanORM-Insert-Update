@@ -21,6 +21,7 @@ public class DepartmentsDAO implements InterfaceDAO{
     public SessionFactory factory;
     public Session session;
     public Transaction transaksi;
+    public FunctionsDAO fdao;
     
     public DepartmentsDAO(){
         this.factory = HibernateUtil.getSessionFactory();
@@ -28,7 +29,8 @@ public class DepartmentsDAO implements InterfaceDAO{
 
     @Override
     public boolean insert(Object object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Departments departments = (Departments) object;
+      return fdao.insert(departments);
     }
 
     @Override
