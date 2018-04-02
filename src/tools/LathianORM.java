@@ -140,5 +140,24 @@ public class LathianORM {
             Departments dept = (Departments) depart; //casting
             System.out.println(dept.getDepartmentName());
         }
+        
+        
+        /////////////////////////////////////////////////////////////////////////////////////////////
+       
+       // COUNTRIES
+       // Memanggil fungsi search Countries
+        List<Object> search = new CountriesDAO().search("regionId", "1");
+        for (Object datasearch : search) { // Untuk setiap objek di dalam list data
+            Countries coun = (Countries) datasearch;
+            System.out.println(coun.getCountryId() +" "+ coun.getCountryName());
+        }
+        
+        ////////////////////////////////////////////////////////////////////////////////////////////
+        
+        //LOCATIONS
+        //Memanggil fungsi update Locations
+        Locations locu = (Locations) new LocationsDAO().getById("1100");
+        locu.setCity("Venice");
+        System.out.println(new LocationsDAO().update(locu));
     }
 }
