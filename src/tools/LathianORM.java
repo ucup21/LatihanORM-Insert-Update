@@ -203,5 +203,14 @@ public class LathianORM {
         co.setCountryName("Singapura");
         System.out.println(new CountriesDAO().update(co));
 
+        /**
+         * search region
+         */
+        System.out.println("search region id");
+        datas =  new RegionsDAO().search("regionid", "2");
+        for (Object rr : datas) {
+            Regions x = (Regions) rr;
+            System.out.println(x.getRegionId()+ " " + x.getRegionName());
     }
+}
 }

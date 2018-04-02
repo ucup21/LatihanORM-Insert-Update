@@ -83,9 +83,28 @@ public class RegionsDAO implements InterfaceDAO{
     }
 
 
+ /**
+     * Fungsi untuk menampilkan data yang dicari berdasarkan kategori(nama kolom) pada regions
+     * @param category
+     * @param search
+     * @return 
+     */
+
     @Override
     public List<Object> search(String category, String search) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Object> data = new ArrayList<>();
+        try {
+            session = factory.openSession();
+            transaction = session.beginTransaction();
+            data = session.createQuery("FROM Regions WHERE "+category+" = "+search).list();
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if(transaction!=null)transaction.rollback();
+        } finally {
+            session.close();
+        }
+        return data;
     }
 
     
