@@ -6,6 +6,9 @@
 package dao;
 
 import java.util.List;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import tools.HibernateUtil;
 
 /**
@@ -13,6 +16,9 @@ import tools.HibernateUtil;
  * @author Ignatius
  */
 public class JobsDAO {
+    public Session session;
+    private SessionFactory factory;
+    public Transaction transaction;
     public FunctionsDAO fdao;
 
     public JobsDAO() {
@@ -22,6 +28,33 @@ public class JobsDAO {
     public List<Object> getAll(){
         String query = "FROM Jobs";
         return fdao.getAll(query);
+    }
+    
+        /**
+     * Fungsi untuk mengambil berdasarkan ID yang ada di tabel Jobs
+     
+     * @return data
+     * /getById() berdasarkan Jobs Id
+      
+     */
+
+    public Object getById(String id) {
+        Object data = new Object();
+        try {
+            session = factory.openSession();
+            transaction = session.beginTransaction();
+            data = session.createQuery("FROM Jobs WHERE job_id = " + id).uniqueResult();
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            session.close();
+        }
+
+        return data;
     }
     
 }

@@ -77,6 +77,22 @@ public class LathianORM {
             Locations loc = (Locations) data;
             System.out.println(" Alamat Jalan: " + loc.getStreetAddress() + "| Kode Pos: " + loc.getPostalCode());   
         }
+          
+              //getById() berdasarkan employee Id
+        Jobs jb = (Jobs) new JobsDAO().getById("PR_REP");;
+        System.out.println(jb.getJobTitle()+ " " + jb.getMaxSalary());
+
+        /*
+        Insert Countries
+        */
+        Countries countries = new Countries("NS", "Nusantara");
+        System.out.println(new CountriesDAO().insert(countries));
+        /**
+         * Delete Countries
+         */
+        countries = new Countries("NS");
+        System.out.println(new CountriesDAO().delete("NS"));
+    }
     }
     
-}
+
