@@ -58,4 +58,22 @@ public class CountriesDAO {
         }
         return flag;
     }
+    public Object getById(String Id) {
+      Object obj = new Object();
+       try {
+            session = factory.openSession();
+            transaction = session.beginTransaction();
+          // obj = session.createQuery("from  Countries where  country_id='" +Id+ "'").uniqueResult();
+             obj = session.createQuery("from Countries where  country_id=:id")
+                     .setInteger("id", Integer.parseInt(Id)).uniqueResult();
+            transaction.commit();  
+        }catch (Exception e) {
+            if (transaction!=null) transaction.rollback(); {
+                
+            }
+        }finally {
+            session.close();
+        }
+        return  obj; 
+}
 }
