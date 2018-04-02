@@ -82,14 +82,18 @@ public class DepartmentsDAO implements InterfaceDAO{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * menampilkan data berdasarkan id di departments
+     * @param id
+     * @return 
+     */
     @Override
     public Object getById(String id) {
        Object obj = new Object();
         try {
             session = factory.openSession();
             transaksi = session.beginTransaction();
-              obj = session.createQuery("From Departments where department_id=:id")
-                      .setParameter("id", Integer.parseInt(id)).uniqueResult();
+              obj = session.createQuery("From Departments where department_id = "+id+"").uniqueResult();
             transaksi.commit();
         } catch (Exception e) {
             e.printStackTrace();

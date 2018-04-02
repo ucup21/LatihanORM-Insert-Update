@@ -5,11 +5,13 @@ import dao.EmployeesDAO;
 import dao.JobsDAO;
 import dao.DepartmentsDAO;
 import dao.LocationsDAO;
+import dao.RegionsDAO;
 import entities.Countries;
 import entities.Locations;
 import entities.Departments;
 import entities.Employees;
 import entities.Jobs;
+import entities.Regions;
 import java.util.Date;
 import java.util.List;
 
@@ -111,6 +113,9 @@ public class LathianORM {
         
         Locations loc =  (Locations) new LocationsDAO().getById("1000");
         System.out.println(loc.getCity()); 
+        
+        Regions reg = (Regions) new RegionsDAO().getById("1");
+        System.out.println(new RegionsDAO().delete(reg));
         
         
     }
