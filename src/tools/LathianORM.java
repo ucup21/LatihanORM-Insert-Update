@@ -3,7 +3,11 @@ package tools;
 import dao.CountriesDAO;
 import dao.EmployeesDAO;
 import dao.JobsDAO;
+import dao.DepartmentsDAO;
+import dao.LocationsDAO;
 import entities.Countries;
+import entities.Locations;
+import entities.Departments;
 import entities.Employees;
 import entities.Jobs;
 import java.util.Date;
@@ -55,14 +59,24 @@ public class LathianORM {
 //        
 //        System.out.println(Employees.class);
 
-        for (Object object : new JobsDAO().getAll()) {
-            Jobs jobs = (Jobs) object;
-            System.out.println(jobs.getJobId()+" "+jobs.getJobTitle()+" "
-                    +jobs.getMaxSalary()+" "+jobs.getMinSalary()+" ");
+//        for (Object object : new JobsDAO().getAll()) {
+//            Jobs jobs = (Jobs) object;
+//            System.out.println(jobs.getJobId()+" "+jobs.getJobTitle()+" "
+//                    +jobs.getMaxSalary()+" "+jobs.getMinSalary()+" ");
+//        }
+//        
+//        Countries countries = new Countries("NS", "Nusantara");
+//        System.out.println(new CountriesDAO().insert(countries));
+
+          Departments dep = (Departments) new DepartmentsDAO().getById("15");
+          System.out.println(dep.getDepartmentName());
+          
+          List <Object> datas = new LocationsDAO().getAll();
+          datas = new LocationsDAO().search("CITY", "Roma");
+          for (Object data : datas) {
+            Locations loc = (Locations) data;
+            System.out.println(" Alamat Jalan: " + loc.getStreetAddress() + "| Kode Pos: " + loc.getPostalCode());   
         }
-        
-        Countries countries = new Countries("NS", "Nusantara");
-        System.out.println(new CountriesDAO().insert(countries));
     }
     
 }
