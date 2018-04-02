@@ -62,6 +62,10 @@ public class Jobs implements Serializable {
         this.jobTitle = jobTitle;
     }
 
+//    public Jobs(String ad_pres) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+
     public String getJobId() {
         return jobId;
     }

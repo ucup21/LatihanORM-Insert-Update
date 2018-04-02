@@ -5,6 +5,7 @@
  */
 package dao;
 
+import entities.Jobs;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -55,6 +56,33 @@ public class JobsDAO {
         }
 
         return data;
+    }
+    
+        /**
+     * Fungsi untuk mengupdate data pada tabel JOBS
+     
+     * @return flag
+     * /update berdasarkan Jobs Id
+      
+     */
+
+    public boolean update(Object object) {
+        boolean flag = false;
+        try {
+            session = factory.openSession();
+            transaction = session.beginTransaction();
+            Jobs jobs = (Jobs) object;
+            Jobs jj = (Jobs) session.get(Jobs.class, jobs.getJobId());
+            jj.setJobTitle(jobs.getJobTitle());
+            jj.setMaxSalary(jobs.getMaxSalary());
+            jj.setMinSalary(jobs.getMinSalary());
+            session.update(jj);
+            flag = true;
+        } catch (Exception e) {
+            if (transaction!=null) transaction.rollback();
+        } finally {
+            session.close();
+        } return flag;
     }
     
 }

@@ -81,7 +81,14 @@ public class LathianORM {
               //getById() berdasarkan employee Id
         Jobs jb = (Jobs) new JobsDAO().getById("PR_REP");;
         System.out.println(jb.getJobTitle()+ " " + jb.getMaxSalary());
-
+        
+        /**
+         * update jobs
+         */
+        
+                jb.setJobId(new Jobs("AD_PRES")+"");
+                jb.setJobTitle("Pembantu Presiden");
+                System.out.println(new JobsDAO().update(jb));
         /*
         Insert Countries
         */
@@ -92,6 +99,9 @@ public class LathianORM {
          */
         countries = new Countries("NS");
         System.out.println(new CountriesDAO().delete("NS"));
+        
+        
+        
     }
     }
     
