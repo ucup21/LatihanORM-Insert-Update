@@ -31,9 +31,36 @@ public class LocationsDAO implements InterfaceDAO{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+     /**
+    * Fungsi update untuk tabel Locations
+    * @param object Object berupa class Locations
+    * @return flag berhasil/gagal diupdate
+    */
     @Override
     public boolean update(Object object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean flag = false;
+        try {
+            session = factory.openSession();
+            transaksi = session.beginTransaction();
+            Locations locations = (Locations) object;
+            Locations loc = (Locations) session.get(Locations.class, locations.getLocationId());
+//            loc.setStreetAddress(locations.getStreetAddress());
+//            loc.setPostalCode(locations.getPostalCode());
+            loc.setCity(locations.getCity());
+//            loc.setStateProvince(locations.getStateProvince());
+//            loc.setCountryId(locations.getCountryId());
+            session.update(loc);
+            transaksi.commit();
+            flag = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaksi!=null) {
+                transaksi.rollback();
+            }
+        } finally {
+            session.close();
+        }
+        return flag;
     }
 
     @Override

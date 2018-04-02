@@ -7,6 +7,8 @@ package dao;
 
 import entities.Countries;
 import entities.Employees;
+import java.util.ArrayList;
+import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -58,6 +60,30 @@ public class CountriesDAO {
         }
         return flag;
     }
+    
+     /**
+    * Fungsi search untuk mencari data pada tabel Countries
+    * @param String category berupa kategori yang ingin dicari, search berupa nilai yang ingin dicari
+    * @return list data di dalam tabel Countries berdasarkan parameter yang dicari
+    */
+    public List<Object> search(String category, String search) {
+        List<Object> data = new ArrayList<>();
+        try {
+            session = factory.openSession();
+            transaction = session.beginTransaction();
+            data = session.createQuery("FROM Countries WHERE "+category+" LIKE '%"+search+"%'").list();
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction!=null) {
+                transaction.rollback();
+            }
+        } finally {
+            session.close();
+        }
+        return data;
+    }
+    
     public Object getById(String Id) {
       Object obj = new Object();
        try {
