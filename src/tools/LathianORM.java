@@ -100,6 +100,17 @@ public class LathianORM {
         countries = new Countries("NS");
         System.out.println(new CountriesDAO().delete("NS"));
         
+        /**
+         * delete from departmens
+         */
+        System.out.println(new DepartmentsDAO().delete(10));
+        
+        /**
+         * get city by id from locations
+         */
+        
+        Locations loc =  (Locations) new LocationsDAO().getById("1000");
+        System.out.println(loc.getCity()); 
         
         
     }
