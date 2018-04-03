@@ -58,4 +58,25 @@ public class FunctionsDAO {
         }
         return data;
     }
+    
+    public Object getById(String query){
+        Object emp = new Object();
+        try {
+            session = factory.openSession();
+            transaction = session.beginTransaction();
+            emp = session
+                    .createQuery("FROM Employees"
+                            + " WHERE employeeId=:id")
+//                    .setInteger("id",Integer.parseInt(id))
+                    .setParameter("id",Integer.parseInt(query))
+                    .uniqueResult();
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if(transaction!=null)transaction.rollback();
+        } finally {
+            session.close();
+        }
+        return emp;
+    }
 }

@@ -22,8 +22,10 @@ public class LocationsDAO implements InterfaceDAO{
     public SessionFactory factory;
     public Session session;
     public Transaction transaksi;
+    public FunctionsDAO fdao;
     
     public LocationsDAO(){
+        this.fdao = new FunctionsDAO(HibernateUtil.getSessionFactory());
         this.factory = HibernateUtil.getSessionFactory();
     }
     @Override
@@ -101,35 +103,13 @@ public class LocationsDAO implements InterfaceDAO{
 
     @Override
     public List<Object> getAll() {
-         List<Object> data = new ArrayList<>();
-        try {
-            session = factory.openSession();
-            transaksi =  session.beginTransaction();
-            data = session.createQuery("FROM Locations").list();
-        } catch (Exception e) {
-            e.printStackTrace();
-            if (transaksi != null) transaksi.rollback(); {
-                System.out.println();
-            }
-        } finally{ session.close();}
-        return data; 
+        return fdao.getAll("FROM Locations");
     }
 
     @Override
     public List<Object> search(String category, String search) {
-        List<Object> data = new ArrayList<>();
-        try {
-            session = factory.openSession();
-            transaksi = session.beginTransaction();
-            data = session.createQuery("From Departments where " + category + " like '% " + search + " %'").list();
-            transaksi.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            if(transaksi!=null)transaksi.rollback();
-        }finally{
-            session.close();
-        }
-        return data;
+        return fdao.getAll("FROM Locations WHERE "
+                + category +" LIKE '%"+search+"'%");
     }
 
     @Override

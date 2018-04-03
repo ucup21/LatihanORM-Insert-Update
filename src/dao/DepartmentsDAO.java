@@ -29,8 +29,7 @@ public class DepartmentsDAO implements InterfaceDAO{
 
     @Override
     public boolean insert(Object object) {
-        Departments departments = (Departments) object;
-      return fdao.insert(departments);
+        return fdao.insert(object);
     }
 
     @Override
