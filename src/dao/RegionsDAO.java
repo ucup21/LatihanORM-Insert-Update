@@ -40,9 +40,9 @@ public class RegionsDAO implements InterfaceDAO{
             session = factory.openSession();
             transaction = session.beginTransaction();
             Regions regions = (Regions) object;
-            Regions reg = (Regions) session.get(Regions.class, regions);
-            reg.setRegionName(regions.getRegionName());
-            session.update(reg);
+            Regions regs = (Regions) session.get(Regions.class, regions);
+            regs.setRegionName(regions.getRegionName());
+            session.update(regs);
             transaction.commit();
             flag = true;
         } catch (Exception e) {

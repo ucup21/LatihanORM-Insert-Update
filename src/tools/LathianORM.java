@@ -222,7 +222,7 @@ public class LathianORM {
         
         //Update () RegionName menjadi Southeast Asia pada tabel tabel Regions yang memiliki Id = 4
         Regions regs = (Regions) new RegionsDAO().getById("4");
-        reg.setRegionName("Southeast Asia");
-        System.out.println(new RegionsDAO().update(reg));
+        regs.setRegionName("Southeast Asia");
+        System.out.println(new RegionsDAO().update(regs));
 }
 }
