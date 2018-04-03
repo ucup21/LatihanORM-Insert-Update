@@ -5,6 +5,7 @@
  */
 package dao;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
@@ -32,6 +33,26 @@ public class FunctionsDAO {
             session = factory.openSession();
             transaction = session.beginTransaction();
             session.saveOrUpdate(object);
+            transaction.commit();
+            flag = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            session.close();
+        }
+        return flag;
+    }
+
+    public boolean delete(Class type, Serializable srlzbl) {
+        boolean flag = false;
+        try {
+            session = factory.openSession();
+            transaction = session.beginTransaction();
+            System.out.println(Object.class);
+            session.delete(session.get(type, srlzbl));
             transaction.commit();
             flag = true;
         } catch (Exception e) {

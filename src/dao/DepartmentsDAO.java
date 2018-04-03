@@ -39,25 +39,7 @@ public class DepartmentsDAO implements InterfaceDAO {
 
     @Override
     public boolean delete(Object object) {
-        boolean flag = false;
-        try {
-            session = factory.openSession();
-            transaksi = session.beginTransaction();
-            Departments dept = (Departments) session
-                    .get(Departments.class,
-                            object.toString());
-            session.delete(dept);
-            transaksi.commit();
-            flag = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            if (transaksi != null) {
-                transaksi.rollback();
-            }
-        } finally {
-            session.close();
-        }
-        return flag;
+        return false;
     }
 
     @Override

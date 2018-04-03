@@ -6,6 +6,7 @@
 package dao;
 
 import entities.Regions;
+import java.math.BigDecimal;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -46,25 +47,7 @@ public class RegionsDAO implements InterfaceDAO {
      */
     @Override
     public boolean delete(Object object) {
-        boolean flag = false;
-        try {
-            session = factory.openSession();
-            transaction = session.beginTransaction();
-            Regions reg = (Regions) session
-                    .get(Regions.class,
-                            Integer.parseInt(object + ""));
-            session.delete(reg);
-            transaction.commit();
-            flag = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            if (transaction != null) {
-                transaction.rollback();
-            }
-        } finally {
-            session.close();
-        }
-        return flag;
+        return false;
     }
 
     @Override

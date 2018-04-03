@@ -46,24 +46,7 @@ public class LocationsDAO implements InterfaceDAO {
 
     @Override
     public boolean delete(Object object) {
-        boolean flag = false;
-        try {
-            session = factory.openSession();
-            transaksi = session.beginTransaction();
-            Locations loc = (Locations) session.get(Locations.class, flag);
-            session.delete(loc);
-            transaksi.commit();
-            flag = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            if (transaksi != null) {
-                transaksi.rollback();
-            }
-        } finally {
-            session.close();
-        }
-        return flag;
-//To change body of generated methods, choose Tools | Templates.
+        return false;
     }
 
     @Override

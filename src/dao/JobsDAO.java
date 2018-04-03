@@ -6,7 +6,6 @@
 package dao;
 
 import entities.Jobs;
-import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -70,23 +69,7 @@ public class JobsDAO {
      * @return flag
      */
     public boolean delete(Object object) {
-        boolean flag = false;
-        try {
-            session = factory.openSession();
-            transaction = session.beginTransaction();
-            Jobs job = (Jobs) session.get(Jobs.class, Integer.parseInt(object + ""));
-            session.delete(job);
-            transaction.commit();
-            flag = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            if (transaction != null) {
-                transaction.rollback();
-            }
-        } finally {
-            session.close();
-        }
-        return flag;
+        return fdao.delete(Jobs.class,object.toString());
     }
 
     /**

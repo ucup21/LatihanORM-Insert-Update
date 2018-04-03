@@ -39,23 +39,7 @@ public class CountriesDAO {
      * @return flag
      */
     public boolean delete(Object object) {
-        boolean flag = false;
-        try {
-            session = factory.openSession();
-            transaction = session.beginTransaction();
-            Countries emp = (Countries) session.get(Countries.class, flag);
-            session.delete(emp);
-            transaction.commit();
-            flag = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            if (transaction != null) {
-                transaction.rollback();
-            }
-        } finally {
-            session.close();
-        }
-        return flag;
+        return false;
     }
 
     /**

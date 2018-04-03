@@ -237,7 +237,8 @@ public class LathianORM {
         jbbb.setJobTitle("contoh baru");
         jbbb.setMinSalary(10000);
         jbbb.setMaxSalary(111002);
-        System.out.println(new JobsDAO().insert(jbbb));
+//        System.out.println(new JobsDAO().insert(jbbb));
+//        System.out.println(new JobsDAO().delete(jbbb.getJobId()));
 //
 //        /*
 //        Update Department 
@@ -289,5 +290,9 @@ public class LathianORM {
 ////        jbbl.setStateProvince("...");
 ////        jbbl.setCountryId("...");
 //        System.out.println(new LocationsDAO().update(jbbl));
+
+//        Employees emp = (Employees) new EmployeesDAO().getById("207");
+//        System.out.println(emp.getEmail());
+//        System.out.println(new EmployeesDAO().delete("207"));
     }
 }
