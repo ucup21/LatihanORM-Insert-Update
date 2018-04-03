@@ -5,6 +5,7 @@
  */
 package dao;
 
+import entities.Departments;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
@@ -16,6 +17,7 @@ import org.hibernate.Transaction;
  * @author Ignatius
  */
 public class FunctionsDAO {
+
     private Session session;
     private Transaction transaction;
     private SessionFactory factory;
@@ -23,8 +25,8 @@ public class FunctionsDAO {
     public FunctionsDAO(SessionFactory factory) {
         this.factory = factory;
     }
-    
-    public boolean insert(Object object){
+
+    public boolean insert(Object object) {
         boolean flag = false;
         try {
             session = factory.openSession();
@@ -34,14 +36,16 @@ public class FunctionsDAO {
             flag = true;
         } catch (Exception e) {
             e.printStackTrace();
-            if(transaction!=null)transaction.rollback();
+            if (transaction != null) {
+                transaction.rollback();
+            }
         } finally {
             session.close();
         }
         return flag;
     }
-    
-    public List<Object> getAll(String query){
+
+    public List<Object> getAll(String query) {
         List<Object> data = new ArrayList<>();
         try {
             session = factory.openSession();
@@ -52,14 +56,16 @@ public class FunctionsDAO {
             transaction.commit();
         } catch (Exception e) {
             e.printStackTrace();
-            if(transaction!=null)transaction.rollback();
+            if (transaction != null) {
+                transaction.rollback();
+            }
         } finally {
             session.close();
         }
         return data;
     }
-    
-    public Object getById(String query){
+
+    public Object getById(String query) {
         Object emp = new Object();
         try {
             session = factory.openSession();
@@ -67,16 +73,37 @@ public class FunctionsDAO {
             emp = session
                     .createQuery("FROM Employees"
                             + " WHERE employeeId=:id")
-//                    .setInteger("id",Integer.parseInt(id))
-                    .setParameter("id",Integer.parseInt(query))
+                    //                    .setInteger("id",Integer.parseInt(id))
+                    .setParameter("id", Integer.parseInt(query))
                     .uniqueResult();
             transaction.commit();
         } catch (Exception e) {
             e.printStackTrace();
-            if(transaction!=null)transaction.rollback();
+            if (transaction != null) {
+                transaction.rollback();
+            }
         } finally {
             session.close();
         }
         return emp;
+    }
+
+    public boolean delete(Object object) {
+        boolean flag = false;
+        try {
+            session = factory.openSession();
+            transaction = session.beginTransaction();
+            session.delete(object);
+            transaction.commit();
+            flag = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            session.close();
+        }
+        return flag;
     }
 }
