@@ -116,7 +116,7 @@ public class LathianORM {
 //         */
 //        System.out.println("");
 //        System.out.println("Menambahkan data Table Jobs");
-//        Jobs jbs = new Jobs("AD_PRE", "President");
+//        Jobs jbs = new Jobs("AD_GUB", "Gubernur");
 //        System.out.println(new JobsDAO().insert(jbs));
 //
 //        /*GetAll Regions
@@ -232,11 +232,11 @@ public class LathianORM {
         /*
         Update Jobs
          */
-        Jobs jbbb = (Jobs) new JobsDAO().getById("ST_MAN");
-        jbbb.setJobId("ST_MAN1");
-        jbbb.setJobTitle("contoh baru");
-        jbbb.setMinSalary(10000);
-        jbbb.setMaxSalary(111002);
+//        Jobs jbbb = (Jobs) new JobsDAO().getById("ST_MAN");
+//        jbbb.setJobId("ST_MAN1");
+//        jbbb.setJobTitle("contoh baru");
+//        jbbb.setMinSalary(10000);
+//        jbbb.setMaxSalary(111002);
 //        System.out.println(new JobsDAO().insert(jbbb));
 //        System.out.println(new JobsDAO().delete(jbbb.getJobId()));
 //
@@ -290,9 +290,30 @@ public class LathianORM {
 ////        jbbl.setStateProvince("...");
 ////        jbbl.setCountryId("...");
 //        System.out.println(new LocationsDAO().update(jbbl));
-
 //        Employees emp = (Employees) new EmployeesDAO().getById("207");
 //        System.out.println(emp.getEmail());
 //        System.out.println(new EmployeesDAO().delete("207"));
+        /**
+         * Delete untuk Jobs
+         */
+//        System.out.println(new JobsDAO().delete("AD_GUB"));
+        /**
+         * Delete untuk Countries
+         */
+//        System.out.println(new CountriesDAO().delete("NS"));
+//        Regions regions = new Regions();
+
+         /**
+          * insert untuk Regions
+          */
+//        regions.setRegionId(BigDecimal.ZERO);
+//        regions.setRegionName("Asia Pasifik");
+//        System.out.println(new CountriesDAO().insert(regions));
+
+           /**
+            * delete untuk Regions
+            */
+//        System.out.println(new RegionsDAO().delete(BigDecimal.ZERO));
+
     }
 }

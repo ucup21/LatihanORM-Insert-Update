@@ -5,6 +5,7 @@
  */
 package dao;
 
+import entities.Countries;
 import entities.Departments;
 import java.util.List;
 import org.hibernate.Session;
@@ -39,7 +40,7 @@ public class DepartmentsDAO implements InterfaceDAO {
 
     @Override
     public boolean delete(Object object) {
-        return false;
+        return fdao.delete(Departments.class,Integer.parseInt(object+""));
     }
 
     @Override

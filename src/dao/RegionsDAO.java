@@ -5,8 +5,10 @@
  */
 package dao;
 
+import entities.Countries;
 import entities.Regions;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -47,7 +49,7 @@ public class RegionsDAO implements InterfaceDAO {
      */
     @Override
     public boolean delete(Object object) {
-        return false;
+        return fdao.delete(Regions.class,(new BigDecimal(object+"")));
     }
 
     @Override

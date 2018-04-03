@@ -6,6 +6,7 @@
 package dao;
 
 import entities.Countries;
+import entities.Jobs;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -39,7 +40,7 @@ public class CountriesDAO {
      * @return flag
      */
     public boolean delete(Object object) {
-        return false;
+        return fdao.delete(Countries.class,object.toString());
     }
 
     /**
