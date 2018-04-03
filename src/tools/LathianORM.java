@@ -101,7 +101,12 @@ public class LathianORM {
 //        /**
 //         * delete from departmens
 //         */
-//        System.out.println(new DepartmentsDAO().delete(10));
+        System.out.println(new CountriesDAO().delete("IT"));
+        System.out.println(new DepartmentsDAO().delete(27));
+        System.out.println(new EmployeesDAO().delete(110));
+        System.out.println(new JobsDAO().delete("PU_MAN"));
+        System.out.println(new LocationsDAO().delete(2200));
+        System.out.println(new RegionsDAO().delete(4));
 //
 //        /**
 //         * get city by id from locations
