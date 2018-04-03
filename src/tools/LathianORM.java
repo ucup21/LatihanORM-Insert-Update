@@ -301,14 +301,14 @@ public class LathianORM {
          * Delete untuk Countries
          */
 //        System.out.println(new CountriesDAO().delete("NS"));
-//        Regions regions = new Regions();
+        Regions regions = new Regions();
 
          /**
           * insert untuk Regions
           */
-//        regions.setRegionId(BigDecimal.ZERO);
-//        regions.setRegionName("Asia Pasifik");
-//        System.out.println(new CountriesDAO().insert(regions));
+        regions.setRegionId(BigDecimal.ZERO);
+        regions.setRegionName("Asia Pasifik");
+        System.out.println(new CountriesDAO().insert(regions));
 
            /**
             * delete untuk Regions
