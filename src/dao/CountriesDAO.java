@@ -85,39 +85,7 @@ public class CountriesDAO {
     }
     
     public Object getById(String Id) {
-      Object obj = new Object();
-       try {
-            session = factory.openSession();
-            transaction = session.beginTransaction();
-          // obj = session.createQuery("from  Countries where  country_id='" +Id+ "'").uniqueResult();
-             obj = session.createQuery("from Countries where  country_id=:id")
-                     .setInteger("id", Integer.parseInt(Id)).uniqueResult();
-            transaction.commit();  
-        }catch (Exception e) {
-            if (transaction!=null) transaction.rollback(); {
-                
-            }
-        }finally {
-            session.close();
-        }
-        return  obj; 
-}
-        public List<Object> getAll() {
-        List<Object> data1 = new ArrayList<>();
-        try {
-            session = factory.openSession();
-            transaction = session.beginTransaction();
-            data1 = session.createQuery("FROM Countries").list(); //list dari employee dibungkus session dan di masukkan dalam data
-            transaction.commit(); //commit fungsinya untuk menyimpan data
-        } catch (Exception e) {
-            e.printStackTrace();
-            if (transaction!=null) {
-                transaction.rollback();
-            }
-        } finally {
-            session.close();
-        }
-        return data1;
+        return fdao.getById("from Countries where countryId='" +Id+ "'");
     }
         
     /**
@@ -150,5 +118,25 @@ public class CountriesDAO {
             session.close();
         }
         return b;
+    }
+    
+    
+    public List<Object> getAll() {
+        List<Object> data = new ArrayList<>();
+        try {
+            session = factory.openSession();
+            transaction = session.beginTransaction();
+            data = session.createQuery("From Countries ").list();
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            session.close();
+        }
+
+        return data;
     }
 }

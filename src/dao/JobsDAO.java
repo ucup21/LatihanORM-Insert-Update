@@ -41,22 +41,7 @@ public class JobsDAO {
      */
 
     public Object getById(String id) {
-        Object data = new Object();
-        try {
-            session = factory.openSession();
-            transaction = session.beginTransaction();
-            data = session.createQuery("FROM Jobs WHERE job_id = " + id).uniqueResult();
-            transaction.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            if (transaction != null) {
-                transaction.rollback();
-            }
-        } finally {
-            session.close();
-        }
-
-        return data;
+      return fdao.getById("from Jobs where jobId='" + id + "'");
     }
     
         /**

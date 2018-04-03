@@ -17,13 +17,14 @@ import tools.HibernateUtil;
  *
  * @author TAMU
  */
-public class DepartmentsDAO implements InterfaceDAO{
+public class DepartmentsDAO implements InterfaceDAO {
+
     public SessionFactory factory;
     public Session session;
     public Transaction transaksi;
     public FunctionsDAO fdao;
-    
-    public DepartmentsDAO(){
+
+    public DepartmentsDAO() {
         this.factory = HibernateUtil.getSessionFactory();
     }
 
@@ -47,8 +48,10 @@ public class DepartmentsDAO implements InterfaceDAO{
             flag = true;
         } catch (Exception e) {
             e.printStackTrace();
-            if(transaksi!=null)transaksi.rollback();
-        }finally{
+            if (transaksi != null) {
+                transaksi.rollback();
+            }
+        } finally {
             session.close();
         }
         return flag;
@@ -56,23 +59,26 @@ public class DepartmentsDAO implements InterfaceDAO{
 
     @Override
     public boolean delete(Object object) {
-    boolean flag = false;
+        boolean flag = false;
         try {
             session = factory.openSession();
             transaksi = session.beginTransaction();
             Departments dept = (Departments) session
-                    .get(Departments.class, 
+                    .get(Departments.class,
                             object.toString());
             session.delete(dept);
             transaksi.commit();
             flag = true;
         } catch (Exception e) {
             e.printStackTrace();
-            if(transaksi!=null)transaksi.rollback();
+            if (transaksi != null) {
+                transaksi.rollback();
+            }
         } finally {
             session.close();
         }
-        return flag;}
+        return flag;
+    }
 
     @Override
     public List<Object> getAll() {
@@ -83,9 +89,10 @@ public class DepartmentsDAO implements InterfaceDAO{
             data = session.createQuery("FROM Departments").list(); //list dibungkus oleh session dimasukan ke data
             transaksi.commit(); //commit untuk menyimpan data ke database
         } catch (Exception e) {
-            if (transaksi != null) 
+            if (transaksi != null) {
                 transaksi.rollback();
-            
+            }
+
         } finally {
             session.close();
         }
@@ -94,17 +101,19 @@ public class DepartmentsDAO implements InterfaceDAO{
 
     @Override
     public List<Object> search(String category, String search) {
-    List<Object> datasearch = new ArrayList<>();
+        List<Object> datasearch = new ArrayList<>();
         try {
             session = factory.openSession();
             transaksi = session.beginTransaction();
             datasearch = session
-                    .createQuery("FROM Departments WHERE " +category+" LIKE '%"+search+"%'")
+                    .createQuery("FROM Departments WHERE " + category + " LIKE '%" + search + "%'")
                     .list();
-        transaksi.commit();
+            transaksi.commit();
         } catch (Exception e) {
             e.printStackTrace();
-            if (transaksi!=null) transaksi.rollback();
+            if (transaksi != null) {
+                transaksi.rollback();
+            }
         } finally {
             session.close();
         }
@@ -113,23 +122,12 @@ public class DepartmentsDAO implements InterfaceDAO{
 
     /**
      * menampilkan data berdasarkan id di departments
+     *
      * @param id
-     * @return 
+     * @return
      */
     @Override
     public Object getById(String id) {
-       Object obj = new Object();
-        try {
-            session = factory.openSession();
-            transaksi = session.beginTransaction();
-              obj = session.createQuery("From Departments where department_id = "+id+"").uniqueResult();
-            transaksi.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            if(transaksi!=null)transaksi.rollback();
-        }finally{
-            session.close();
-        }
-        return obj;
+        return fdao.getById("from Departments where departmentId='" + id + "'");
     }
 }

@@ -22,6 +22,7 @@ public class RegionsDAO implements InterfaceDAO{
     public SessionFactory factory;
     private Session session;
     private Transaction transaction;
+    public FunctionsDAO fdao;
     
     public RegionsDAO() {
         this.factory = HibernateUtil
@@ -152,21 +153,7 @@ public class RegionsDAO implements InterfaceDAO{
     
     @Override
       public Object getById(String id) {
-        Object a = new Object();
-        try {
-            session= factory.openSession(); 
-            transaction = session.beginTransaction(); 
-                    a= session.createQuery("FROM Regions WHERE regionId=:id ") 
-                    .setParameter("id", Integer.parseInt(id)).uniqueResult();
-                    transaction.commit(); 
-        } catch (Exception e) { 
-             e.printStackTrace();
-            if(transaction!=null)transaction.rollback(); 
-        }
-        finally{ 
-            session.close(); 
-        }
-        return a;
+     return fdao.getById("from Regions where regionId='" + id + "'");
     }
 
 

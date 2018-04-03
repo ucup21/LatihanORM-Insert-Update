@@ -114,23 +114,6 @@ public class LocationsDAO implements InterfaceDAO{
 
     @Override
     public Object getById(String id) {
-    Object loc = new Object();
-        try {
-            session = factory.openSession();
-            transaksi = session.beginTransaction();
-            loc = session
-                    .createQuery("FROM Locations"
-                            + " WHERE locationid=:id")
-//                    .setInteger("id",Integer.parseInt(id))
-                    .setParameter("id",id)
-                    .uniqueResult();
-            transaksi.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            if(transaksi!=null)transaksi.rollback();
-        } finally {
-            session.close();
-        }
-        return loc;}
-    
+        return fdao.getById("from Locations where locationId='" + id + "'");
+}
 }
