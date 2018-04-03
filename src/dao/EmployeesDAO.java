@@ -25,8 +25,7 @@ public class EmployeesDAO implements InterfaceDAO {
     public FunctionsDAO fdao;
 
     public EmployeesDAO() {
-        this.factory = HibernateUtil
-                .getSessionFactory();
+         this.fdao = new FunctionsDAO(HibernateUtil.getSessionFactory());
     }
 
     /**
@@ -41,31 +40,7 @@ public class EmployeesDAO implements InterfaceDAO {
 
     @Override
     public boolean update(Object object) {
-        boolean flag = false;
-        try {
-            session = factory.openSession();
-            transaction = session.beginTransaction();
-            Employees employees = (Employees) object;
-            Employees emp = (Employees) session
-                    .get(Employees.class,
-                            employees.getEmployeeId());
-            emp.setFirstName(employees.getFirstName());
-//            emp.setPhoneNumber(employees.getPhoneNumber());
-//            emp.setSalary(employees.getSalary());
-//            emp.setManagerId(employees.getManagerId());
-//            emp.setDepartmentId(employees.getDepartmentId());
-            session.update(emp);
-            transaction.commit();
-            flag = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            if (transaction != null) {
-                transaction.rollback();
-            }
-        } finally {
-            session.close();
-        }
-        return flag;
+        return fdao.update(object);
     }
 
     @Override

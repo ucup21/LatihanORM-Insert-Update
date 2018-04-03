@@ -12,6 +12,7 @@ import entities.Departments;
 import entities.Employees;
 import entities.Jobs;
 import entities.Regions;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -76,10 +77,9 @@ public class LathianORM {
 //            Locations loc = (Locations) data;
 //            System.out.println(" Alamat Jalan: " + loc.getStreetAddress() + "| Kode Pos: " + loc.getPostalCode());
 //        }
-
         //getById() berdasarkan employee Id
-        Jobs jb = (Jobs) new JobsDAO().getById("SA_REP");;
-        System.out.println(jb.getJobTitle() + " " + jb.getMaxSalary());
+//        Jobs jb = (Jobs) new JobsDAO().getById("SA_REP");;
+//        System.out.println(jb.getJobTitle() + " " + jb.getMaxSalary());
 //
 //        /**
 //         * update jobs
@@ -144,14 +144,13 @@ public class LathianORM {
 //        
 //        /////////////////////////////////////////////////////////////////////////////////////////////
 //       
-       // COUNTRIES
-       // Memanggil fungsi search Countries
-        List<Object> search = new CountriesDAO().search("regionId", "1");
-        for (Object datasearch : search) { // Untuk setiap objek di dalam list data
-            Countries coun = (Countries) datasearch;
-            System.out.println(coun.getCountryId() +" "+ coun.getCountryName());
-        }
-        
+        // COUNTRIES
+        // Memanggil fungsi search Countries
+//        List<Object> search = new CountriesDAO().search("regionId", "1");
+//        for (Object datasearch : search) { // Untuk setiap objek di dalam list data
+//            Countries coun = (Countries) datasearch;
+//            System.out.println(coun.getCountryId() +" "+ coun.getCountryName());
+//        }
 //        
 //        ////////////////////////////////////////////////////////////////////////////////////////////
 //        
@@ -230,5 +229,64 @@ public class LathianORM {
 //        Departments departments =  new Departments(Short.parseShort("105"), "Pemasaran");
 //        System.out.println(new DepartmentsDAO().insert(departments));
 //}
-}
+        /*
+        Update Jobs
+         */
+        Jobs jbbb = (Jobs) new JobsDAO().getById("ST_MAN");
+        jbbb.setJobTitle("JANGAN SALAH");
+        jbbb.setMinSalary(10000);
+        jbbb.setMaxSalary(111002);
+        System.out.println(new JobsDAO().update(jbbb));
+
+        /*
+        Update Department 
+//         */
+        Departments jbbd = (Departments) new DepartmentsDAO().getById("10");
+        jbbd.setDepartmentName("JANGAN SALAH");
+//        jbbd.setManagerId(...);
+//        jbbd.setLocationId(...);
+        System.out.println(new DepartmentsDAO().update(jbbd));
+
+//        /*
+//        Update Countries
+//         */
+        Countries jbbc = (Countries) new CountriesDAO().getById("AR");
+        jbbc.setCountryName("JANGAN SALAH");
+//        jbbc.setRegionId(...);
+        System.out.println(new CountriesDAO().update(jbbc));
+//
+//        /*
+//        Update Regions 
+//         */
+            Regions jbbr = (Regions) new RegionsDAO().getById("1");
+            jbbr.setRegionName("JANGAN SALAH");
+            System.out.println(new RegionsDAO().update(jbbr));
+////
+//        /*
+//        Update Employees 
+//         */
+        Employees jbbm = (Employees) new EmployeesDAO().getById("100");
+        jbbm.setFirstName("JANGAN SALAH");
+        jbbm.setLastName("JANGAN SALAH");
+//        jbbm.setEmail("...");
+//        jbbm.setPhoneNumber("...");
+//        jbbm.setHireDate("...");
+//        jbbm.setJobId("...");
+//        jbbm.setSalary(BigDecimal.ZERO);
+//        jbbm.setCommissionPct("...");
+//        jbbm.setManagerId("...");
+//        jbbm.setDepartmentId("...");
+        System.out.println(new EmployeesDAO().update(jbbm));
+
+//        /*
+//        Update Locations
+//         */
+        Locations jbbl = (Locations) new LocationsDAO().getById("1000");
+        jbbl.setStreetAddress("JANGAN SALAH");
+//        jbbl.setPostalCode("...");
+//        jbbl.setCity("...");
+//        jbbl.setStateProvince("...");
+//        jbbl.setCountryId("...");
+        System.out.println(new LocationsDAO().update(jbbl));
+    }
 }

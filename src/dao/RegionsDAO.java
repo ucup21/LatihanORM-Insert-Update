@@ -26,8 +26,7 @@ public class RegionsDAO implements InterfaceDAO {
     public FunctionsDAO fdao;
 
     public RegionsDAO() {
-        this.factory = HibernateUtil
-                .getSessionFactory();
+          this.fdao = new FunctionsDAO(HibernateUtil.getSessionFactory());
     }
 
     @Override
@@ -37,25 +36,7 @@ public class RegionsDAO implements InterfaceDAO {
 
     @Override
     public boolean update(Object object) {
-        boolean flag = false;
-        try {
-            session = factory.openSession();
-            transaction = session.beginTransaction();
-            Regions regions = (Regions) object;
-            Regions regs = (Regions) session.get(Regions.class, regions);
-            regs.setRegionName(regions.getRegionName());
-            session.update(regs);
-            transaction.commit();
-            flag = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            if (transaction != null) {
-                transaction.rollback();
-            }
-        } finally {
-            session.close();
-        }
-        return flag;
+        return fdao.update(object);
 
     }
 
@@ -114,7 +95,7 @@ public class RegionsDAO implements InterfaceDAO {
      */
     @Override
     public Object getById(String id) {
-        return fdao.getById("from Regions where regionId='" + id + "'");
+        return fdao.getById("from Regions where regionId ='" + id + "'");
     }
 
 }
