@@ -22,10 +22,10 @@ public class EmployeesDAO implements InterfaceDAO{
     public SessionFactory factory;
     private Session session;
     private Transaction transaction;
+    public FunctionsDAO fdao;
     
     public EmployeesDAO() {
-        this.factory = HibernateUtil
-                .getSessionFactory();
+         this.fdao = new FunctionsDAO(HibernateUtil.getSessionFactory());
     }
 
     /**
@@ -82,23 +82,7 @@ public class EmployeesDAO implements InterfaceDAO{
 
     @Override
     public boolean delete(Object object) {
-        boolean flag = false;
-        try {
-            session = factory.openSession();
-            transaction = session.beginTransaction();
-            Employees emp = (Employees) session
-                    .get(Employees.class, 
-                            Integer.parseInt(object+""));
-            session.delete(emp);
-            transaction.commit();
-            flag = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            if(transaction!=null)transaction.rollback();
-        } finally {
-            session.close();
-        }
-        return flag;
+        return fdao.delete(object);
     }
 
     @Override
