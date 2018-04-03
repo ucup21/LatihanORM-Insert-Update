@@ -78,7 +78,7 @@ public class LathianORM {
 //        }
 
         //getById() berdasarkan employee Id
-        Jobs jb = (Jobs) new JobsDAO().getById("PR_REP");;
+        Jobs jb = (Jobs) new JobsDAO().getById("SA_REP");;
         System.out.println(jb.getJobTitle() + " " + jb.getMaxSalary());
 //
 //        /**
