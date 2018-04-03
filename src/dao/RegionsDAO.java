@@ -22,7 +22,7 @@ public class RegionsDAO implements InterfaceDAO{
     public SessionFactory factory;
     private Session session;
     private Transaction transaction;
-    
+ public  FunctionsDAO fdao;
     public RegionsDAO() {
         this.factory = HibernateUtil
                 .getSessionFactory();
@@ -62,23 +62,7 @@ public class RegionsDAO implements InterfaceDAO{
      */
     @Override
     public boolean delete(Object object) {
-        boolean flag = false;
-        try {
-            session = factory.openSession();
-            transaction = session.beginTransaction();
-            Regions reg = (Regions) session
-                    .get(Regions.class, 
-                            Integer.parseInt(object+""));
-            session.delete(reg);
-            transaction.commit();
-            flag = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            if(transaction!=null)transaction.rollback();
-        } finally {
-            session.close();
-        }
-        return flag;
+        return fdao.delete(object);
     }
 
     @Override
