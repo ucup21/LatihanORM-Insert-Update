@@ -17,43 +17,29 @@ import tools.HibernateUtil;
  *
  * @author TAMU
  */
-public class LocationsDAO implements InterfaceDAO{
+public class LocationsDAO implements InterfaceDAO {
 
     public SessionFactory factory;
     public Session session;
     public Transaction transaksi;
     public FunctionsDAO fdao;
-    
-    public LocationsDAO(){
+
+    public LocationsDAO() {
         this.fdao = new FunctionsDAO(HibernateUtil.getSessionFactory());
         this.factory = HibernateUtil.getSessionFactory();
     }
+
     @Override
     public boolean insert(Object object) {
-        boolean flag = false;
-        try {
-            session = factory.openSession();
-            transaksi = session.beginTransaction();
-            Locations loc = (Locations) object;
-            session.save(loc);
-            transaksi.commit();
-            flag = true; //kenapa itdak di buat return? jika flag true maka catch tidak dijalankan
-        } catch (Exception e) {
-            e.printStackTrace();
-            if (transaksi!=null) {
-                transaksi.rollback();
-            }
-        } finally {
-            session.close();
-        }
-        return flag;
+        return fdao.insert(object);
     }
 
-     /**
-    * Fungsi update untuk tabel Locations
-    * @param object Object berupa class Locations
-    * @return flag berhasil/gagal diupdate
-    */
+    /**
+     * Fungsi update untuk tabel Locations
+     *
+     * @param object Object berupa class Locations
+     * @return flag berhasil/gagal diupdate
+     */
     @Override
     public boolean update(Object object) {
         boolean flag = false;
@@ -72,7 +58,7 @@ public class LocationsDAO implements InterfaceDAO{
             flag = true;
         } catch (Exception e) {
             e.printStackTrace();
-            if (transaksi!=null) {
+            if (transaksi != null) {
                 transaksi.rollback();
             }
         } finally {
@@ -83,7 +69,7 @@ public class LocationsDAO implements InterfaceDAO{
 
     @Override
     public boolean delete(Object object) {
-       boolean flag = false;
+        boolean flag = false;
         try {
             session = factory.openSession();
             transaksi = session.beginTransaction();
@@ -93,8 +79,10 @@ public class LocationsDAO implements InterfaceDAO{
             flag = true;
         } catch (Exception e) {
             e.printStackTrace();
-            if(transaksi!=null)transaksi.rollback();
-        }finally{
+            if (transaksi != null) {
+                transaksi.rollback();
+            }
+        } finally {
             session.close();
         }
         return flag;
@@ -108,12 +96,11 @@ public class LocationsDAO implements InterfaceDAO{
 
     @Override
     public List<Object> search(String category, String search) {
-        return fdao.getAll("FROM Locations WHERE "
-                + category +" LIKE '%"+search+"'%");
+        return fdao.getAll("FROM Locations WHERE " + category + " LIKE '%" + search + "%'");
     }
 
     @Override
     public Object getById(String id) {
         return fdao.getById("from Locations where locationId='" + id + "'");
-}
+    }
 }

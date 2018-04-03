@@ -82,42 +82,12 @@ public class DepartmentsDAO implements InterfaceDAO {
 
     @Override
     public List<Object> getAll() {
-        List<Object> data = new ArrayList<>();
-        try {
-            session = factory.openSession();
-            transaksi = session.beginTransaction();
-            data = session.createQuery("FROM Departments").list(); //list dibungkus oleh session dimasukan ke data
-            transaksi.commit(); //commit untuk menyimpan data ke database
-        } catch (Exception e) {
-            if (transaksi != null) {
-                transaksi.rollback();
-            }
-
-        } finally {
-            session.close();
-        }
-        return data;
+        return fdao.getAll("FROM Departments");
     }
 
     @Override
     public List<Object> search(String category, String search) {
-        List<Object> datasearch = new ArrayList<>();
-        try {
-            session = factory.openSession();
-            transaksi = session.beginTransaction();
-            datasearch = session
-                    .createQuery("FROM Departments WHERE " + category + " LIKE '%" + search + "%'")
-                    .list();
-            transaksi.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            if (transaksi != null) {
-                transaksi.rollback();
-            }
-        } finally {
-            session.close();
-        }
-        return datasearch;
+        return fdao.getAll("FROM Deparments WHERE " + category + " LIKE '%" + search + "%'");
     }
 
     /**

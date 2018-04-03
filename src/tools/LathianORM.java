@@ -144,14 +144,14 @@ public class LathianORM {
 //        
 //        /////////////////////////////////////////////////////////////////////////////////////////////
 //       
-//       // COUNTRIES
-//       // Memanggil fungsi search Countries
-//        List<Object> search = new CountriesDAO().search("regionId", "1");
-//        for (Object datasearch : search) { // Untuk setiap objek di dalam list data
-//            Countries coun = (Countries) datasearch;
-//            System.out.println(coun.getCountryId() +" "+ coun.getCountryName());
-//        }
-//        
+       // COUNTRIES
+       // Memanggil fungsi search Countries
+        List<Object> search = new CountriesDAO().search("regionId", "1");
+        for (Object datasearch : search) { // Untuk setiap objek di dalam list data
+            Countries coun = (Countries) datasearch;
+            System.out.println(coun.getCountryId() +" "+ coun.getCountryName());
+        }
+        
 //        
 //        ////////////////////////////////////////////////////////////////////////////////////////////
 //        

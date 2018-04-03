@@ -20,28 +20,14 @@ public class FunctionsDAO {
     private Session session;
     private Transaction transaction;
     private SessionFactory factory;
+    public FunctionsDAO fdao;
 
     public FunctionsDAO(SessionFactory factory) {
         this.factory = factory;
     }
 
     public boolean insert(Object object) {
-        boolean flag = false;
-        try {
-            session = factory.openSession();
-            transaction = session.beginTransaction();
-            session.save(object);
-            transaction.commit();
-            flag = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            if (transaction != null) {
-                transaction.rollback();
-            }
-        } finally {
-            session.close();
-        }
-        return flag;
+        return fdao.insert(object);
     }
 
     public List<Object> getAll(String query) {
@@ -69,7 +55,7 @@ public class FunctionsDAO {
         try {
             session = factory.openSession();
             transaction = session.beginTransaction();
-             obj = session.createQuery(query).uniqueResult();
+            obj = session.createQuery(query).uniqueResult();
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {

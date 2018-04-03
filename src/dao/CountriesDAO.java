@@ -23,7 +23,7 @@ public class CountriesDAO {
     public Session session;
     private SessionFactory factory;
     public Transaction transaction;
-    
+
     public FunctionsDAO fdao;
 
     public CountriesDAO() {
@@ -31,8 +31,7 @@ public class CountriesDAO {
     }
 
     public boolean insert(Object object) {
-        Countries countries = (Countries) object;
-        return fdao.insert(countries);
+        return fdao.insert(object);
     }
 
     /**
@@ -60,36 +59,23 @@ public class CountriesDAO {
         }
         return flag;
     }
-    
-     /**
-    * Fungsi search untuk mencari data pada tabel Countries
-    * @param String category berupa kategori yang ingin dicari, search berupa nilai yang ingin dicari
-    * @return list data di dalam tabel Countries berdasarkan parameter yang dicari
-    */
+
+    /**
+     * Fungsi search untuk mencari data pada tabel Countries
+     *
+     * @param String category berupa kategori yang ingin dicari, search berupa
+     * nilai yang ingin dicari
+     * @return list data di dalam tabel Countries berdasarkan parameter yang
+     * dicari
+     */
     public List<Object> search(String category, String search) {
-        List<Object> data = new ArrayList<>();
-        try {
-            session = factory.openSession();
-            transaction = session.beginTransaction();
-            data = session.createQuery("FROM Countries WHERE "+category+" LIKE '%"+search+"%'").list();
-            transaction.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            if (transaction!=null) {
-                transaction.rollback();
-            }
-        } finally {
-            session.close();
-        }
-        return data;
+        return fdao.getAll("FROM Countries WHERE " + category + " LIKE '%" + search + "%'");
     }
-    
-    
-    
+
     public Object getById(String Id) {
-        return fdao.getById("from Countries where countryId='" +Id+ "'");
+        return fdao.getById("from Countries where countryId='" + Id + "'");
     }
-        
+
     /**
      * fungsi insert untuk mengedit data pada tabel Countries
      *
@@ -109,7 +95,7 @@ public class CountriesDAO {
 //            emp.setManagerId(employees.getManagerId());
 //            emp.setDepartmentId(employees.getDepartmentId());
             session.update(c);
-            
+
             b = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -121,24 +107,8 @@ public class CountriesDAO {
         }
         return b;
     }
-    
-    
-    public List<Object> getAll() {
-        List<Object> data = new ArrayList<>();
-        try {
-            session = factory.openSession();
-            transaction = session.beginTransaction();
-            data = session.createQuery("From Countries ").list();
-            transaction.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            if (transaction != null) {
-                transaction.rollback();
-            }
-        } finally {
-            session.close();
-        }
 
-        return data;
+    public List<Object> getAll() {
+        return fdao.getAll("FROM Countries");
     }
 }

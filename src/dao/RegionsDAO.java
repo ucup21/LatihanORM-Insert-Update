@@ -18,12 +18,13 @@ import tools.HibernateUtil;
  *
  * @author Asus
  */
-public class RegionsDAO implements InterfaceDAO{
+public class RegionsDAO implements InterfaceDAO {
+
     public SessionFactory factory;
     private Session session;
     private Transaction transaction;
     public FunctionsDAO fdao;
-    
+
     public RegionsDAO() {
         this.factory = HibernateUtil
                 .getSessionFactory();
@@ -31,12 +32,12 @@ public class RegionsDAO implements InterfaceDAO{
 
     @Override
     public boolean insert(Object object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return fdao.insert(object);
     }
 
     @Override
     public boolean update(Object object) {
-    boolean flag = false;
+        boolean flag = false;
         try {
             session = factory.openSession();
             transaction = session.beginTransaction();
@@ -48,8 +49,10 @@ public class RegionsDAO implements InterfaceDAO{
             flag = true;
         } catch (Exception e) {
             e.printStackTrace();
-            if(transaction!=null)transaction.rollback();
-        }finally{
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
             session.close();
         }
         return flag;
@@ -58,8 +61,9 @@ public class RegionsDAO implements InterfaceDAO{
 
     /**
      * fungsi delete pada regions
+     *
      * @param object
-     * @return 
+     * @return
      */
     @Override
     public boolean delete(Object object) {
@@ -68,14 +72,16 @@ public class RegionsDAO implements InterfaceDAO{
             session = factory.openSession();
             transaction = session.beginTransaction();
             Regions reg = (Regions) session
-                    .get(Regions.class, 
-                            Integer.parseInt(object+""));
+                    .get(Regions.class,
+                            Integer.parseInt(object + ""));
             session.delete(reg);
             transaction.commit();
             flag = true;
         } catch (Exception e) {
             e.printStackTrace();
-            if(transaction!=null)transaction.rollback();
+            if (transaction != null) {
+                transaction.rollback();
+            }
         } finally {
             session.close();
         }
@@ -84,78 +90,31 @@ public class RegionsDAO implements InterfaceDAO{
 
     @Override
     public List<Object> getAll() {
-        List<Object> data = new ArrayList<>();
-        try {
-            session = factory.openSession();
-            transaction = session.beginTransaction();
-            data = session.createQuery("FROM Regions").list();
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-        } finally {
-            session.close();
-        }
-        return data;
+        return fdao.getAll("FROM Regions");
     }
 
-
- /**
-     * Fungsi untuk menampilkan data yang dicari berdasarkan kategori(nama kolom) pada regions
+    /**
+     * Fungsi untuk menampilkan data yang dicari berdasarkan kategori(nama
+     * kolom) pada regions
+     *
      * @param category
      * @param search
-     * @return 
+     * @return
      */
-
     @Override
     public List<Object> search(String category, String search) {
-        List<Object> data = new ArrayList<>();
-        try {
-            session = factory.openSession();
-            transaction = session.beginTransaction();
-            data = session.createQuery("FROM Regions WHERE "+category+" = "+search).list();
-            transaction.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            if(transaction!=null)transaction.rollback();
-        } finally {
-            session.close();
-        }
-        return data;
+        return fdao.getAll("FROM Regions WHERE " + category + " LIKE '%" + search + "%'");
     }
 
-    
-//    @Override
-//    public Object getById(String id) {
-//        Object reg = new Object();
-//        try {
-//            session = factory.openSession();
-//            transaction = session.beginTransaction();
-//            reg = session
-//                    .createQuery("FROM Regions"
-//                            + " WHERE regionid="+id+"").uniqueResult();
-//            transaction.commit();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            if(transaction!=null)transaction.rollback();
-//        } finally {
-//            session.close();
-//        }
-//        return reg;
-//    }
-    
     /**
      * Fungsi untuk menampilkan Region berdasarkan Id
+     *
      * @param id
      * @return a
      */
-    
     @Override
-      public Object getById(String id) {
-     return fdao.getById("from Regions where regionId='" + id + "'");
+    public Object getById(String id) {
+        return fdao.getById("from Regions where regionId='" + id + "'");
     }
 
-
-    
 }

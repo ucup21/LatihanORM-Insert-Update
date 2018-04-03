@@ -36,24 +36,7 @@ public class EmployeesDAO implements InterfaceDAO {
      */
     @Override
     public boolean insert(Object object) {
-        boolean flag = false;
-        try {
-            session = factory.openSession();
-            transaction = session.beginTransaction();
-            Employees emp = (Employees) object;
-//            session.persist(emp);
-            session.save(emp);
-            transaction.commit();
-            flag = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            if (transaction != null) {
-                transaction.rollback();
-            }
-        } finally {
-            session.close();
-        }
-        return flag;
+        return fdao.insert(object);
     }
 
     @Override
@@ -110,46 +93,12 @@ public class EmployeesDAO implements InterfaceDAO {
 
     @Override
     public List<Object> getAll() {
-        List<Object> data = new ArrayList<>();
-        try {
-            session = factory.openSession();
-            transaction = session.beginTransaction();
-            data = session
-                    .createQuery("FROM Employees")
-                    .list();
-            transaction.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            if (transaction != null) {
-                transaction.rollback();
-            }
-        } finally {
-            session.close();
-        }
-        return data;
+        return fdao.getAll("FROM Employees");
     }
 
     @Override
     public List<Object> search(String category, String search) {
-        List<Object> data = new ArrayList<>();
-        try {
-            session = factory.openSession();
-            transaction = session.beginTransaction();
-            data = session
-                    .createQuery("FROM Employees"
-                            + " WHERE " + category
-                            + " LIKE '%" + search + "%'")
-                    .list();
-            transaction.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            if (transaction != null) {
-                transaction.rollback();
-            }
-        } finally {
-            session.close();
-        }
-        return data;
+        return fdao.getAll("FROM Employees WHERE " + category + " LIKE '%" + search + "%'");
     }
 
     @Override
