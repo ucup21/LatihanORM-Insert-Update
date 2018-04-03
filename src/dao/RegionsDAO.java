@@ -5,9 +5,7 @@
  */
 package dao;
 
-import entities.Employees;
 import entities.Regions;
-import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -36,7 +34,7 @@ public class RegionsDAO implements InterfaceDAO {
 
     @Override
     public boolean update(Object object) {
-        return fdao.update(object);
+        return fdao.insert(object);
 
     }
 

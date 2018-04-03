@@ -50,7 +50,7 @@ public class JobsDAO {
      *
      */
     public boolean update(Object object) {
-        return fdao.update(object);
+        return fdao.insert(object);
     }
 
     /**

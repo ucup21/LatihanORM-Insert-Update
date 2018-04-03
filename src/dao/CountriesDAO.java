@@ -6,8 +6,6 @@
 package dao;
 
 import entities.Countries;
-import entities.Employees;
-import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -83,7 +81,7 @@ public class CountriesDAO {
      * @return mengembalikan nilai true jika berhasil mengupdate data
      */
     public boolean update(Object object) {
-        return fdao.update(object);
+        return fdao.insert(object);
     }
 
     public List<Object> getAll() {

@@ -31,7 +31,7 @@ public class FunctionsDAO {
         try {
             session = factory.openSession();
             transaction = session.beginTransaction();
-            session.save(object);
+            session.saveOrUpdate(object);
             transaction.commit();
             flag = true;
         } catch (Exception e) {
@@ -74,27 +74,6 @@ public class FunctionsDAO {
             obj = session.createQuery(query).uniqueResult();
             transaction.commit();
         } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            {
-
-            }
-        } finally {
-            session.close();
-        }
-        return obj;
-    }
-
-    public boolean update(Object object) {
-        boolean flag = false;
-        try {
-            session = factory.openSession();
-            transaction = session.beginTransaction();
-            session.saveOrUpdate(object);
-            transaction.commit();
-            flag = true;
-        } catch (Exception e) {
             e.printStackTrace();
             if (transaction != null) {
                 transaction.rollback();
@@ -102,6 +81,6 @@ public class FunctionsDAO {
         } finally {
             session.close();
         }
-        return flag;
+        return obj;
     }
 }

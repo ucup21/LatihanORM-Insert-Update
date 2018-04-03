@@ -232,11 +232,12 @@ public class LathianORM {
         /*
         Update Jobs
          */
-        Jobs jbbb = (Jobs) new JobsDAO().getById("ST_MAN1");
+        Jobs jbbb = (Jobs) new JobsDAO().getById("ST_MAN");
+        jbbb.setJobId("ST_MAN1");
         jbbb.setJobTitle("contoh baru");
         jbbb.setMinSalary(10000);
         jbbb.setMaxSalary(111002);
-        System.out.println(new JobsDAO().update(jbbb));
+        System.out.println(new JobsDAO().insert(jbbb));
 //
 //        /*
 //        Update Department 
