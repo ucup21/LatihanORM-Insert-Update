@@ -27,8 +27,24 @@ public class FunctionsDAO {
     }
 
     public boolean insert(Object object) {
-        return fdao.insert(object);
+        boolean flag = false;
+        try {
+            session = factory.openSession();
+            transaction = session.beginTransaction();
+            session.save(object);
+            transaction.commit();
+            flag = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            session.close();
+        }
+        return flag;
     }
+    
 
     public List<Object> getAll(String query) {
         List<Object> data = new ArrayList<>();

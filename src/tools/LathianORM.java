@@ -232,61 +232,61 @@ public class LathianORM {
         /*
         Update Jobs
          */
-        Jobs jbbb = (Jobs) new JobsDAO().getById("ST_MAN");
-        jbbb.setJobTitle("JANGAN SALAH");
+        Jobs jbbb = (Jobs) new JobsDAO().getById("ST_MAN1");
+        jbbb.setJobTitle("contoh baru");
         jbbb.setMinSalary(10000);
         jbbb.setMaxSalary(111002);
         System.out.println(new JobsDAO().update(jbbb));
-
-        /*
-        Update Department 
-//         */
-        Departments jbbd = (Departments) new DepartmentsDAO().getById("10");
-        jbbd.setDepartmentName("JANGAN SALAH");
-//        jbbd.setManagerId(...);
-//        jbbd.setLocationId(...);
-        System.out.println(new DepartmentsDAO().update(jbbd));
-
-//        /*
-//        Update Countries
-//         */
-        Countries jbbc = (Countries) new CountriesDAO().getById("AR");
-        jbbc.setCountryName("JANGAN SALAH");
-//        jbbc.setRegionId(...);
-        System.out.println(new CountriesDAO().update(jbbc));
 //
 //        /*
-//        Update Regions 
-//         */
-            Regions jbbr = (Regions) new RegionsDAO().getById("1");
-            jbbr.setRegionName("JANGAN SALAH");
-            System.out.println(new RegionsDAO().update(jbbr));
+//        Update Department 
+////         */
+//        Departments jbbd = (Departments) new DepartmentsDAO().getById("10");
+//        jbbd.setDepartmentName("JANGAN SALAH");
+////        jbbd.setManagerId(...);
+////        jbbd.setLocationId(...);
+//        System.out.println(new DepartmentsDAO().update(jbbd));
+//
+////        /*
+////        Update Countries
+////         */
+//        Countries jbbc = (Countries) new CountriesDAO().getById("AR");
+//        jbbc.setCountryName("JANGAN SALAH");
+////        jbbc.setRegionId(...);
+//        System.out.println(new CountriesDAO().update(jbbc));
 ////
-//        /*
-//        Update Employees 
-//         */
-        Employees jbbm = (Employees) new EmployeesDAO().getById("100");
-        jbbm.setFirstName("JANGAN SALAH");
-        jbbm.setLastName("JANGAN SALAH");
-//        jbbm.setEmail("...");
-//        jbbm.setPhoneNumber("...");
-//        jbbm.setHireDate("...");
-//        jbbm.setJobId("...");
-//        jbbm.setSalary(BigDecimal.ZERO);
-//        jbbm.setCommissionPct("...");
-//        jbbm.setManagerId("...");
-//        jbbm.setDepartmentId("...");
-        System.out.println(new EmployeesDAO().update(jbbm));
-
-//        /*
-//        Update Locations
-//         */
-        Locations jbbl = (Locations) new LocationsDAO().getById("1000");
-        jbbl.setStreetAddress("JANGAN SALAH");
-//        jbbl.setPostalCode("...");
-//        jbbl.setCity("...");
-//        jbbl.setStateProvince("...");
-//        jbbl.setCountryId("...");
-        System.out.println(new LocationsDAO().update(jbbl));
+////        /*
+////        Update Regions 
+////         */
+//            Regions jbbr = (Regions) new RegionsDAO().getById("1");
+//            jbbr.setRegionName("JANGAN SALAH");
+//            System.out.println(new RegionsDAO().update(jbbr));
+//////
+////        /*
+////        Update Employees 
+////         */
+//        Employees jbbm = (Employees) new EmployeesDAO().getById("100");
+//        jbbm.setFirstName("JANGAN SALAH");
+//        jbbm.setLastName("JANGAN SALAH");
+////        jbbm.setEmail("...");
+////        jbbm.setPhoneNumber("...");
+////        jbbm.setHireDate("...");
+////        jbbm.setJobId("...");
+////        jbbm.setSalary(BigDecimal.ZERO);
+////        jbbm.setCommissionPct("...");
+////        jbbm.setManagerId("...");
+////        jbbm.setDepartmentId("...");
+//        System.out.println(new EmployeesDAO().update(jbbm));
+//
+////        /*
+////        Update Locations
+////         */
+//        Locations jbbl = (Locations) new LocationsDAO().getById("1000");
+//        jbbl.setStreetAddress("JANGAN SALAH");
+////        jbbl.setPostalCode("...");
+////        jbbl.setCity("...");
+////        jbbl.setStateProvince("...");
+////        jbbl.setCountryId("...");
+//        System.out.println(new LocationsDAO().update(jbbl));
     }
 }
