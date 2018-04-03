@@ -46,7 +46,7 @@ public class LocationsDAO implements InterfaceDAO {
 
     @Override
     public boolean delete(Object object) {
-        return fdao.delete(Locations.class,Short.parseShort(object+""));
+        return fdao.delete(Locations.class, Short.decode(object + ""));
     }
 
     @Override

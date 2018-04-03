@@ -40,7 +40,7 @@ public class DepartmentsDAO implements InterfaceDAO {
 
     @Override
     public boolean delete(Object object) {
-        return fdao.delete(Departments.class,Short.parseShort(object+""));
+        return fdao.delete(Departments.class, Short.decode(object + ""));
     }
 
     @Override
