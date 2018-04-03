@@ -35,7 +35,24 @@ public class RegionsDAO implements InterfaceDAO{
 
     @Override
     public boolean update(Object object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    boolean flag = false;
+        try {
+            session = factory.openSession();
+            transaction = session.beginTransaction();
+            Regions regions = (Regions) object;
+            Regions reg = (Regions) session.get(Regions.class, regions);
+            reg.setRegionName(regions.getRegionName());
+            session.update(reg);
+            transaction.commit();
+            flag = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            if(transaction!=null)transaction.rollback();
+        }finally{
+            session.close();
+        }
+        return flag;
+
     }
 
     /**

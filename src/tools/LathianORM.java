@@ -212,5 +212,17 @@ public class LathianORM {
             Regions x = (Regions) rr;
             System.out.println(x.getRegionId()+ " " + x.getRegionName());
     }
+        
+        //Search() berdasarkan departmentName = IT
+        List<Object> datasearch = new DepartmentsDAO().search("departmentName", "IT");
+        for (Object object : datasearch) {
+            Departments depart = (Departments) obj;
+            System.out.println(depart.getManagerId() + " " + depart.getLocationId());
+        }
+        
+        //Update () RegionName menjadi Southeast Asia pada tabel tabel Regions yang memiliki Id = 4
+        Regions regs = (Regions) new RegionsDAO().getById("4");
+        reg.setRegionName("Southeast Asia");
+        System.out.println(new RegionsDAO().update(reg));
 }
 }

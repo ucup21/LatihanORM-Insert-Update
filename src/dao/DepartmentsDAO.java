@@ -93,7 +93,21 @@ public class DepartmentsDAO implements InterfaceDAO{
 
     @Override
     public List<Object> search(String category, String search) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    List<Object> datasearch = new ArrayList<>();
+        try {
+            session = factory.openSession();
+            transaksi = session.beginTransaction();
+            datasearch = session
+                    .createQuery("FROM Departments WHERE " +category+" LIKE '%"+search+"%'")
+                    .list();
+        transaksi.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaksi!=null) transaksi.rollback();
+        } finally {
+            session.close();
+        }
+        return datasearch;
     }
 
     /**
