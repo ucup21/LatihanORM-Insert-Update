@@ -101,8 +101,7 @@ public class LathianORM {
 //        /**
 //         * delete from departmens
 //         */
-        System.out.println(new DepartmentsDAO().delete(27));
-    
+//        System.out.println(new DepartmentsDAO().delete(27));
 //
 //        /**
 //         * get city by id from locations
@@ -256,24 +255,29 @@ public class LathianORM {
 //        Countries countries = (Countries) new CountriesDAO().getById("BL");
 //        System.out.println(new CountriesDAO().delete(countries));
 //        Regions regions = new Regions();
-
-
-         /**
-          * insert untuk Regions
-          */
+        /**
+         * insert untuk Regions
+         */
 //        regions.setRegionId(BigDecimal.ZERO);
 //        regions.setRegionName("Asia Pasifik");
 //        System.out.println(new CountriesDAO().insert(regions));
-
-           /**
-            * delete untuk Regions
-            */
+        /**
+         * delete untuk Regions
+         */
 //        System.out.println(new RegionsDAO().delete(BigDecimal.ZERO));
-          
-/**
-           * delete untuk Locations
-           */
+        /**
+         * delete untuk Locations
+         */
 //          System.out.println(new LocationsDAO().delete(106));
+//        System.out.println(new EmployeesDAO().delete(207));
+        Departments d = new Departments(Short.parseShort("11"), "coba");
+//        System.out.println(new DepartmentsDAO().insert(d));
+        System.out.println(new DepartmentsDAO().delete(d.getDepartmentId()));
+        
+        Employees e = new Employees(280);
+        e.setFirstName("Lala");
+        System.out.println(new EmployeesDAO().insert(e));
+//        System.out.println(new DepartmentsDAO().delete(d.getDepartmentId()));
 
     }
 }
