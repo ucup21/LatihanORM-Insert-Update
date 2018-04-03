@@ -101,12 +101,8 @@ public class LathianORM {
 //        /**
 //         * delete from departmens
 //         */
-        System.out.println(new CountriesDAO().delete("IT"));
         System.out.println(new DepartmentsDAO().delete(27));
-        System.out.println(new EmployeesDAO().delete(110));
-        System.out.println(new JobsDAO().delete("PU_MAN"));
-        System.out.println(new LocationsDAO().delete(2200));
-        System.out.println(new RegionsDAO().delete(4));
+    
 //
 //        /**
 //         * get city by id from locations
@@ -257,68 +253,27 @@ public class LathianORM {
 ////        /*
 ////        Update Countries
 ////         */
-//        Countries jbbc = (Countries) new CountriesDAO().getById("AR");
-//        jbbc.setCountryName("JANGAN SALAH");
-////        jbbc.setRegionId(...);
-//        System.out.println(new CountriesDAO().update(jbbc));
-////
-////        /*
-////        Update Regions 
-////         */
-//            Regions jbbr = (Regions) new RegionsDAO().getById("1");
-//            jbbr.setRegionName("JANGAN SALAH");
-//            System.out.println(new RegionsDAO().update(jbbr));
-//////
-////        /*
-////        Update Employees 
-////         */
-//        Employees jbbm = (Employees) new EmployeesDAO().getById("100");
-//        jbbm.setFirstName("JANGAN SALAH");
-//        jbbm.setLastName("JANGAN SALAH");
-////        jbbm.setEmail("...");
-////        jbbm.setPhoneNumber("...");
-////        jbbm.setHireDate("...");
-////        jbbm.setJobId("...");
-////        jbbm.setSalary(BigDecimal.ZERO);
-////        jbbm.setCommissionPct("...");
-////        jbbm.setManagerId("...");
-////        jbbm.setDepartmentId("...");
-//        System.out.println(new EmployeesDAO().update(jbbm));
-//
-////        /*
-////        Update Locations
-////         */
-//        Locations jbbl = (Locations) new LocationsDAO().getById("1000");
-//        jbbl.setStreetAddress("JANGAN SALAH");
-////        jbbl.setPostalCode("...");
-////        jbbl.setCity("...");
-////        jbbl.setStateProvince("...");
-////        jbbl.setCountryId("...");
-//        System.out.println(new LocationsDAO().update(jbbl));
-//        Employees emp = (Employees) new EmployeesDAO().getById("207");
-//        System.out.println(emp.getEmail());
-//        System.out.println(new EmployeesDAO().delete("207"));
-        /**
-         * Delete untuk Jobs
-         */
-//        System.out.println(new JobsDAO().delete("AD_GUB"));
-        /**
-         * Delete untuk Countries
-         */
-//        System.out.println(new CountriesDAO().delete("NS"));
-        Regions regions = new Regions();
+//        Countries countries = (Countries) new CountriesDAO().getById("BL");
+//        System.out.println(new CountriesDAO().delete(countries));
+//        Regions regions = new Regions();
+
 
          /**
           * insert untuk Regions
           */
-        regions.setRegionId(BigDecimal.ZERO);
-        regions.setRegionName("Asia Pasifik");
-        System.out.println(new CountriesDAO().insert(regions));
+//        regions.setRegionId(BigDecimal.ZERO);
+//        regions.setRegionName("Asia Pasifik");
+//        System.out.println(new CountriesDAO().insert(regions));
 
            /**
             * delete untuk Regions
             */
 //        System.out.println(new RegionsDAO().delete(BigDecimal.ZERO));
+          
+/**
+           * delete untuk Locations
+           */
+//          System.out.println(new LocationsDAO().delete(106));
 
     }
 }
