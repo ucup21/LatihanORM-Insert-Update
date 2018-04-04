@@ -107,7 +107,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="txtCountryId" alignment="0" min="-2" pref="117" max="-2" attributes="0"/>
                       <Component id="txtCountryName" alignment="0" pref="197" max="32767" attributes="0"/>
-                      <Component id="txtRegionId" alignment="0" max="32767" attributes="0"/>
+                      <Component id="cmbRegion" alignment="1" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="86" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -135,8 +135,8 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtRegionId" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnhapus" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cmbRegion" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="22" max="32767" attributes="0"/>
               </Group>
@@ -144,8 +144,6 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JTextField" name="txtRegionId">
-        </Component>
         <Component class="javax.swing.JButton" name="btnsimpan">
           <Properties>
             <Property name="text" type="java.lang.String" value="Simpan"/>
@@ -183,6 +181,19 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Region Id"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cmbRegion">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="0"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbRegionActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

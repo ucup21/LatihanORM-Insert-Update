@@ -15,10 +15,10 @@ import javax.swing.JOptionPane;
  * @author hp
  */
 public class CountriesView extends javax.swing.JFrame {
-    
-    private String header[] = {"Country Id", "Country Name", "Region Id"};
+
+    private String header[] = {"No", "Country Id", "Country Name", "Region"};
+    private String headerTable[] = {"country_id", "country_name", "regionId"};
     public CountriesController cc;
-    public CountriesDAO cDAO;
 
     /**
      * Creates new form Countries_view
@@ -27,10 +27,9 @@ public class CountriesView extends javax.swing.JFrame {
         initComponents();
         cc = new CountriesController();
         cc.bindingAll(tblCountries, header);
+        cc.loadRegion(cmbRegion);
         reset();
     }
-
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -44,7 +43,6 @@ public class CountriesView extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCountries = new javax.swing.JTable();
         pnlCountries = new javax.swing.JPanel();
-        txtRegionId = new javax.swing.JTextField();
         btnsimpan = new javax.swing.JButton();
         btnhapus = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -52,6 +50,7 @@ public class CountriesView extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtCountryName = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        cmbRegion = new javax.swing.JComboBox<>();
         cmbKategori = new javax.swing.JComboBox<>();
         txtSearch = new javax.swing.JTextField();
         btnCari = new javax.swing.JButton();
@@ -103,6 +102,12 @@ public class CountriesView extends javax.swing.JFrame {
 
         jLabel3.setText("Region Id");
 
+        cmbRegion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbRegionActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlCountriesLayout = new javax.swing.GroupLayout(pnlCountries);
         pnlCountries.setLayout(pnlCountriesLayout);
         pnlCountriesLayout.setHorizontalGroup(
@@ -117,7 +122,7 @@ public class CountriesView extends javax.swing.JFrame {
                 .addGroup(pnlCountriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtCountryId, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCountryName, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
-                    .addComponent(txtRegionId))
+                    .addComponent(cmbRegion, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
                 .addGroup(pnlCountriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnsimpan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -139,8 +144,8 @@ public class CountriesView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlCountriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txtRegionId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnhapus))
+                    .addComponent(btnhapus)
+                    .addComponent(cmbRegion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
@@ -195,42 +200,54 @@ public class CountriesView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnsimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsimpanActionPerformed
+//        boolean hasil = false;
+//        if (!txtCountryId.isEnabled()) {
+//
+//            hasil = cc.update(txtCountryId.getText(),
+//                    txtCountryName.getText(),
+//                    Long.parseLong(txtRegionId.getText()));
+//            cc.bindingAll(tblCountries, header);
+//        } else {
+//
+//            hasil = cc.insert(txtCountryId.getText(),
+//                    txtCountryName.getText(),
+//                    Long.parseLong(txtRegionId.getText()));
+//            cc.bindingAll(tblCountries, header);
+//
+//        }
+//
+//        String pesan = "Gagal Menyimpan Data";
+//        if (hasil) {
+//            pesan = "Berhasil Menyimpan Data";
+//        }
+//        JOptionPane.showMessageDialog(this, pesan);
+//        reset();
         boolean hasil = false;
-        if (!txtCountryId.isEnabled()) {
-          
-            hasil = cc.update(txtCountryId.getText(),
-                    txtCountryName.getText(),
-                    Long.parseLong(txtRegionId.getText()));
-            cc.bindingAll(tblCountries, header);
-        }else{
+        hasil = cc.save(txtCountryId.getText(), txtCountryName.getText(),
+                cmbRegion.getSelectedItem().toString(),
+                txtCountryId.isEnabled());
 
-            hasil = cc.insert(txtCountryId.getText(),
-                txtCountryName.getText(),
-                      Long.parseLong(txtRegionId.getText()));
-            cc.bindingAll(tblCountries, header);
-
-        }
-
-        String pesan = "Gagal Menyimpan Data";
+        String pesan = "Gagal menyimpan data";
         if (hasil) {
-            pesan = "Berhasil Menyimpan Data";
+            pesan = "Berhasil menyimpan data";
         }
         JOptionPane.showMessageDialog(this, pesan);
+        cc.bindingAll(tblCountries, header);
         reset();
     }//GEN-LAST:event_btnsimpanActionPerformed
 
     private void btnhapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhapusActionPerformed
         int i = JOptionPane.showConfirmDialog(this, "Apakah anda yakin akan menghapus data ini?");
 //        System.out.println(i);
-        if (i==0) {
+        if (i == 0) {
             String pesan = "Gagal Hapus";
             boolean hasil = cc.delete(txtCountryId.getText());
-            if(hasil){
+            if (hasil) {
                 pesan = "Berhasil Hapus";
             }
             JOptionPane.showMessageDialog(this, pesan);
             cc.bindingAll(tblCountries, header);
-            
+
         }
         reset();
     }//GEN-LAST:event_btnhapusActionPerformed
@@ -246,32 +263,38 @@ public class CountriesView extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbKategoriActionPerformed
 
     private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
-        // TODO add your handling code here:
-        String kolom = "";
-        switch (cmbKategori.getSelectedIndex()) {
-            case 0:
-                kolom = "country_id";
-                break;
-            case 1:
-                kolom = "country_name";
-                break;
-            case 2:
-                kolom = "region_id";
-                break;
-            default:
-                throw new AssertionError();
-        }
-        cc.bindingSearch(tblCountries, header, kolom, txtSearch.getText());
+//        String kolom = "";
+//        switch (cmbKategori.getSelectedIndex()) {
+//            case 0:
+//                kolom = "country_id";
+//                break;
+//            case 1:
+//                kolom = "country_name";
+//                break;
+//            case 2:
+//                kolom = "region_id";
+//                break;
+//            default:
+//                throw new AssertionError();
+//        }
+//        cc.bindingSearch(tblCountries, header, kolom, txtSearch.getText());
+        cc.bindingSearch(tblCountries, header,
+                headerTable[cmbKategori.getSelectedIndex()],
+                txtSearch.getText());
     }//GEN-LAST:event_btnCariActionPerformed
 
     private void tblCountriesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCountriesMouseClicked
-        txtCountryId.setText(tblCountries.getValueAt(tblCountries.getSelectedRow(), 0) + "");
-        txtCountryName.setText(tblCountries.getValueAt(tblCountries.getSelectedRow(), 1) + "");
-        txtRegionId.setText(tblCountries.getValueAt(tblCountries.getSelectedRow(), 2) + "");
+        txtCountryId.setText(tblCountries.getValueAt(tblCountries.getSelectedRow(), 1) + "");
+        txtCountryName.setText(tblCountries.getValueAt(tblCountries.getSelectedRow(), 2) + "");
+//        txtRegionId.setText(tblCountries.getValueAt(tblCountries.getSelectedRow(), 2) + "");
         txtCountryId.setEnabled(false);
         btnsimpan.setEnabled(true);
         btnhapus.setEnabled(true);
     }//GEN-LAST:event_tblCountriesMouseClicked
+
+    private void cmbRegionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbRegionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbRegionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -314,6 +337,7 @@ public class CountriesView extends javax.swing.JFrame {
     private javax.swing.JButton btnhapus;
     private javax.swing.JButton btnsimpan;
     private javax.swing.JComboBox<String> cmbKategori;
+    private javax.swing.JComboBox<String> cmbRegion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -322,17 +346,17 @@ public class CountriesView extends javax.swing.JFrame {
     private javax.swing.JTable tblCountries;
     private javax.swing.JTextField txtCountryId;
     private javax.swing.JTextField txtCountryName;
-    private javax.swing.JTextField txtRegionId;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
-      
+
     public void reset() {
         txtCountryId.setText("");
         txtCountryName.setText("");
-        txtRegionId.setText("");
+        cmbRegion.setSelectedIndex(0);
+        cmbKategori.setSelectedIndex(0);
         txtSearch.setText("");
+        txtCountryId.setEnabled(true);
         btnsimpan.setEnabled(false);
         btnhapus.setEnabled(false);
-        txtCountryId.setEnabled(true);
     }
 }
