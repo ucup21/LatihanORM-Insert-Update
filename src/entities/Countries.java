@@ -134,7 +134,7 @@ public class Countries implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Countries[ countryId=" + countryId + " ]";
+        return "" + countryId + "";
     }
     
 }
