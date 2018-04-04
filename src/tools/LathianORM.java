@@ -280,12 +280,15 @@ public class LathianORM {
 //        System.out.println(new DepartmentsDAO().delete(d.getDepartmentId()));
 
 
+/**
+ * Insert Employees 
+ */
 //        Employees emp = new Employees(301, "wery", "CBA", new Date());
 //        emp.setJobId(new Jobs("SA_REP"));
 //        System.out.println(new EmployeesDAO().insert(emp));
-        
-        
-        
+/**
+ * Delete Employees
+ */
         System.out.println(new EmployeesDAO().delete("300"));
         
 
