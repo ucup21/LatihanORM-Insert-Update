@@ -279,39 +279,49 @@ public class LathianORM {
 //        System.out.println(new EmployeesDAO().insert(e));
 //        System.out.println(new DepartmentsDAO().delete(d.getDepartmentId()));
 
-/**
- * Menghapus data pada tabel Jobs berdasarkan Id
- */
-        Jobs jbbb = (Jobs) new JobsDAO().getById("ST_MAN1");
-        System.out.println(new JobsDAO().delete(jbbb.getJobId()));
 
-/**
- * Menghapus data pada tabel Employees berdasarkan Id
- */
-        Employees emps = (Employees) new EmployeesDAO().getById("208");
-        System.out.println(new EmployeesDAO().delete(emps.getEmployeeId()));
+//        Employees emp = new Employees(301, "wery", "CBA", new Date());
+//        emp.setJobId(new Jobs("SA_REP"));
+//        System.out.println(new EmployeesDAO().insert(emp));
+        
+        
+        
+        System.out.println(new EmployeesDAO().delete("300"));
+        
 
-/**
- * Menghapus data pada tabel Countries berdasarkan Id
- */
-        Countries country = (Countries) new CountriesDAO().getById("ID");
-        System.out.println(new CountriesDAO().delete(country.getCountryId()));
-
-/**
- * Menghapus data pada tabel Depratments berdasarkan Id
- */
-        Departments department = (Departments) new DepartmentsDAO().getById("280");
-        System.out.println(new DepartmentsDAO().delete(department.getDepartmentId()));
-
-/**
- * Menghapus data pada tabel Locations berdasarkan Id
- */
-        Locations location = (Locations) new LocationsDAO().getById("3500");
-        System.out.println(new LocationsDAO().delete(location.getLocationId()));
-
-/**
- * Menghapus data pada tabel Regions berdasarkan Id
- */
-        System.out.println(new RegionsDAO().delete(BigDecimal.ZERO));
+///**
+// * Menghapus data pada tabel Jobs berdasarkan Id
+// */
+//        Jobs jbbb = (Jobs) new JobsDAO().getById("ST_MAN1");
+//        System.out.println(new JobsDAO().delete(jbbb.getJobId()));
+//
+///**
+// * Menghapus data pada tabel Employees berdasarkan Id
+// */
+//        Employees emps = (Employees) new EmployeesDAO().getById("208");
+//        System.out.println(new EmployeesDAO().delete(emps.getEmployeeId()));
+//
+///**
+// * Menghapus data pada tabel Countries berdasarkan Id
+// */
+//        Countries country = (Countries) new CountriesDAO().getById("ID");
+//        System.out.println(new CountriesDAO().delete(country.getCountryId()));
+//
+///**
+// * Menghapus data pada tabel Depratments berdasarkan Id
+// */
+//        Departments department = (Departments) new DepartmentsDAO().getById("280");
+//        System.out.println(new DepartmentsDAO().delete(department.getDepartmentId()));
+//
+///**
+// * Menghapus data pada tabel Locations berdasarkan Id
+// */
+//        Locations location = (Locations) new LocationsDAO().getById("3500");
+//        System.out.println(new LocationsDAO().delete(location.getLocationId()));
+//
+///**
+// * Menghapus data pada tabel Regions berdasarkan Id
+// */
+//        System.out.println(new RegionsDAO().delete(BigDecimal.ZERO));
     }
 }
