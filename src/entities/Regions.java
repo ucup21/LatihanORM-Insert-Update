@@ -100,5 +100,10 @@ public class Regions implements Serializable {
     public String toString() {
         return "entities.Regions[ regionId=" + regionId + " ]";
     }
+
+    public Regions(BigDecimal regionId, String regionName) {
+        this.regionId = regionId;
+        this.regionName = regionName;
+    }
     
 }
