@@ -50,6 +50,7 @@ public class DepartmentsDAO implements InterfaceDAO {
 
     @Override
     public List<Object> search(String category, String search) {
+//        return fdao.getAll("FROM Departments WHERE " + category + " LIKE '%" + search + "%'");
         return fdao.getAll("FROM Departments WHERE " + category + " LIKE '%" + search + "%'");
     }
 
