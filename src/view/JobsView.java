@@ -16,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author dbayu
  */
-public class ViewJobs extends javax.swing.JFrame {
+public class JobsView extends javax.swing.JFrame {
      private String header[] = {"Job ID", "Job Title", "Minimum Salary", "Maximum Salary"};
     public JobsController jgc;
     
@@ -25,7 +25,7 @@ public class ViewJobs extends javax.swing.JFrame {
     /**
      * Creates new form ViewJobs
      */
-    public ViewJobs() {
+    public JobsView() {
         initComponents();
         
         jgc = new JobsController();
@@ -337,20 +337,21 @@ public class ViewJobs extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewJobs.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JobsView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewJobs.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JobsView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewJobs.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JobsView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewJobs.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JobsView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewJobs().setVisible(true);
+                new JobsView().setVisible(true);
             }
         });
     }

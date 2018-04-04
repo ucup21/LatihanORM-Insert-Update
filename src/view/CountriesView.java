@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  *
  * @author hp
  */
-public class Countries_view extends javax.swing.JFrame {
+public class CountriesView extends javax.swing.JFrame {
     
     private String header[] = {"Country Id", "Country Name", "Region Id"};
     public CountriesController cc;
@@ -23,7 +23,7 @@ public class Countries_view extends javax.swing.JFrame {
     /**
      * Creates new form Countries_view
      */
-    public Countries_view() {
+    public CountriesView() {
         initComponents();
         cc = new CountriesController();
         cc.bindingAll(tblCountries, header);
@@ -290,20 +290,21 @@ public class Countries_view extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Countries_view.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CountriesView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Countries_view.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CountriesView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Countries_view.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CountriesView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Countries_view.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CountriesView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Countries_view().setVisible(true);
+                new CountriesView().setVisible(true);
             }
         });
     }
