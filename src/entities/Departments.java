@@ -126,7 +126,7 @@ public class Departments implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Departments[ departmentId=" + departmentId + " ]";
+        return "" + departmentId + "";
     }
     
 }

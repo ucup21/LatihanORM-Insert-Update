@@ -129,7 +129,7 @@ public class Jobs implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Jobs[ jobId=" + jobId + " ]";
+        return "" + jobId + "";
     }
     
 }

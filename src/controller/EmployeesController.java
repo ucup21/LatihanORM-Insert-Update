@@ -7,8 +7,11 @@ package controller;
 
 import dao.EmployeesDAO;
 import dao.JobsDAO;
+import entities.Departments;
 import entities.Employees;
 import entities.Jobs;
+import entities.Locations;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JTable;
@@ -53,16 +56,49 @@ public class EmployeesController {
     }
 
     public boolean insert(Integer employeeId, String firstName, String lastName, String email, String phoneNumber,
-            String HIRE_DATE, String jobId, String salary, String commissionPct, String managerId, String departmentId) {
+            String HIRE_DATE, String jobId, Long salary, Float commissionPct, String managerId, String departmentId) {
 
-        Employees employees = new Employees(employeeId, lastName, email,
-                new java.sql.Date(new Long(HIRE_DATE)), (Jobs) new JobsDAO().getById(jobId));
-        return edao.insert(employees);
+        Employees d = new Employees();
+        d.setEmployeeId(employeeId);
+        d.setFirstName(firstName);
+        d.setLastName(lastName);
+        d.setEmail(email);
+        d.setPhoneNumber(phoneNumber);
+        d.setHireDate(new java.sql.Date(new Long(HIRE_DATE)));
+        d.setJobId(new Jobs(jobId));
+        d.setSalary(new BigDecimal(salary));
+        d.setCommissionPct(BigDecimal.valueOf(commissionPct));
+        d.setManagerId(new Employees(employeeId));
+        d.setDepartmentId(new Departments(Short.parseShort(departmentId)));
+        
+        
+        return edao.insert(d);
+//        Employees employees = new Employees(employeeId, lastName, email,
+//                new java.sql.Date(new Long(HIRE_DATE)), (Jobs) new JobsDAO().getById(jobId));
+//        return edao.insert(employees);
     }
 
-    public boolean update(Integer employeeId, String lastName, String email, Date hireDate) {
-        Employees emp = new Employees(employeeId, lastName, email, hireDate);
-        return edao.update(emp);
+    public boolean update(Integer employeeId, String firstName, String lastName, String email, String phoneNumber,
+            String HIRE_DATE, String jobId, Long salary, Float commissionPct, String managerId, String departmentId) {
+
+        Employees d = new Employees();
+        d.setEmployeeId(employeeId);
+        d.setFirstName(firstName);
+        d.setLastName(lastName);
+        d.setEmail(email);
+        d.setPhoneNumber(phoneNumber);
+        d.setHireDate(new java.sql.Date(new Long(HIRE_DATE)));
+        d.setJobId(new Jobs(jobId));
+        d.setSalary(new BigDecimal(salary));
+        d.setCommissionPct(BigDecimal.valueOf(commissionPct));
+        d.setManagerId(new Employees(employeeId));
+        d.setDepartmentId(new Departments(Short.parseShort(departmentId)));
+        
+        
+        return edao.update(d);
+//        Employees employees = new Employees(employeeId, lastName, email,
+//                new java.sql.Date(new Long(HIRE_DATE)), (Jobs) new JobsDAO().getById(jobId));
+//        return edao.update(employees);
     }
 
 }

@@ -6,6 +6,8 @@
 package view;
 
 import controller.EmployeesController;
+import java.math.BigDecimal;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,7 +15,7 @@ import javax.swing.JOptionPane;
  * @author TAMU
  */
 public class EmployeesView extends javax.swing.JFrame {
-
+    
     private String header[] = {"Employee ID", "First Name", "Last Name", "Email", "Phone", "Hire Date", "Job ID", "Salary", "Commission", "Manager ID", "Department ID"};
     public EmployeesController ec;
 
@@ -24,7 +26,7 @@ public class EmployeesView extends javax.swing.JFrame {
         initComponents();
         ec = new EmployeesController();
         ec.BindingAll(TblEmployees, header);
-
+        
     }
 
     /**
@@ -96,6 +98,11 @@ public class EmployeesView extends javax.swing.JFrame {
 
             }
         ));
+        TblEmployees.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TblEmployeesMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(TblEmployees);
 
         lblJobId.setText("Job ID");
@@ -355,20 +362,40 @@ public class EmployeesView extends javax.swing.JFrame {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         boolean hasil = false;
-        hasil = ec.insert(Integer.parseInt(txtEmployeeID.getText()),
-                txtFirstName.getText(),
-                txtLastName.getText(),
-                txtEmail.getText(),
-                txtPhoneNumber.getText(),
-                txtHireDate.getDate().getTime() + "",
-                txtJobID.getText(),
-                txtCommissionPCT.getText(),
-                txtSalary.getText(),
-                txtManagerID.getText(),
-                txtDepartmentID.getText());
+        if (!txtEmployeeID.isEnabled()) {
+            hasil = ec.update(Integer.parseInt(txtEmployeeID.getText()),
+                    txtFirstName.getText(),
+                    txtLastName.getText(),
+                    txtEmail.getText(),
+                    txtPhoneNumber.getText(),
+                    txtHireDate.getDate().getTime() + "",
+                    txtJobID.getText(),
+                    (Long.valueOf(txtSalary.getText())),
+                    (Float.valueOf(txtCommissionPCT.getText())),
+                    txtManagerID.getText(),
+                    txtDepartmentID.getText());
+            txtEmployeeID.setEnabled(true);
+        } else {
+            hasil = ec.insert(Integer.parseInt(txtEmployeeID.getText()),
+                    txtFirstName.getText(),
+                    txtLastName.getText(),
+                    txtEmail.getText(),
+                    txtPhoneNumber.getText(),
+                    txtHireDate.getDate().getTime() + "",
+                    txtJobID.getText(),
+                    (Long.valueOf(txtSalary.getText())),
+                    (Float.valueOf(txtCommissionPCT.getText())),
+                    txtManagerID.getText(),
+                    txtDepartmentID.getText());
+        }
         String pesan = "Gagal menambahkan data";
         if (hasil) {
-            pesan = "Berhasil menambahkan Data";
+            try {
+                 pesan = "Berhasil menambahkan Data";
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+           
         }
         JOptionPane.showMessageDialog(this, pesan);
         ec.BindingAll(TblEmployees, header);
@@ -446,6 +473,21 @@ public class EmployeesView extends javax.swing.JFrame {
 //        System.out.println(txtHireDate.getDate().getTime());
     }//GEN-LAST:event_txtHireDateMouseClicked
 
+    private void TblEmployeesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TblEmployeesMouseClicked
+        txtEmployeeID.setText("" + TblEmployees.getValueAt(TblEmployees.getSelectedRow(), 0) + "");
+        txtFirstName.setText("" + TblEmployees.getValueAt(TblEmployees.getSelectedRow(), 1) + "");
+        txtLastName.setText("" + TblEmployees.getValueAt(TblEmployees.getSelectedRow(), 2) + "");
+        txtEmail.setText("" + TblEmployees.getValueAt(TblEmployees.getSelectedRow(), 3) + "");
+        txtPhoneNumber.setText("" + TblEmployees.getValueAt(TblEmployees.getSelectedRow(), 4) + "");
+        txtHireDate.setDate((Date) TblEmployees.getValueAt(TblEmployees.getSelectedRow(), 5));
+        txtJobID.setText("" + TblEmployees.getValueAt(TblEmployees.getSelectedRow(), 6) + "");
+        txtSalary.setText("" + TblEmployees.getValueAt(TblEmployees.getSelectedRow(), 7) + "");
+        txtCommissionPCT.setText("" + TblEmployees.getValueAt(TblEmployees.getSelectedRow(), 8) + "");
+        txtManagerID.setText("" + TblEmployees.getValueAt(TblEmployees.getSelectedRow(), 9) + "");
+        txtDepartmentID.setText("" + TblEmployees.getValueAt(TblEmployees.getSelectedRow(), 10) + "");
+        
+    }//GEN-LAST:event_TblEmployeesMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -516,4 +558,13 @@ public class EmployeesView extends javax.swing.JFrame {
     private javax.swing.JTextField txtSalary;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
+
+    public void reset() {
+        txtEmployeeID.setText("");
+        txtFirstName.setText("");
+        txtLastName.setText("");
+        txtEmail.setText("");
+        
+    }
+    
 }
