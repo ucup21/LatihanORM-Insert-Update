@@ -68,7 +68,7 @@ public class EmployeesController {
         d.setJobId(new Jobs(jobId));
         d.setSalary(new BigDecimal(salary));
         d.setCommissionPct(BigDecimal.valueOf(commissionPct));
-        d.setManagerId(new Employees(employeeId));
+        d.setManagerId(new Employees(Integer.parseInt(managerId)));
         d.setDepartmentId(new Departments(Short.parseShort(departmentId)));
         
         
@@ -100,5 +100,10 @@ public class EmployeesController {
 //                new java.sql.Date(new Long(HIRE_DATE)), (Jobs) new JobsDAO().getById(jobId));
 //        return edao.update(employees);
     }
+    
+    public boolean delete(String id) {
+        return edao.delete(id);
+    }
+
 
 }

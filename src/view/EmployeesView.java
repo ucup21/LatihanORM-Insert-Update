@@ -162,6 +162,11 @@ public class EmployeesView extends javax.swing.JFrame {
                 txtEmployeeIDActionPerformed(evt);
             }
         });
+        txtEmployeeID.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtEmployeeIDKeyPressed(evt);
+            }
+        });
 
         lblLastName.setText("Last Name");
 
@@ -403,6 +408,24 @@ public class EmployeesView extends javax.swing.JFrame {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
+       
+        int i = JOptionPane.showConfirmDialog(this, "Apakah Anda Yakin Ingin dihapus?");
+        if (i == 0) {
+            try {
+            String pesan = "Gagal hapus";
+            boolean hasil = ec.delete(txtEmployeeID.getText());
+            if (hasil) {
+                pesan = "Hore Berhasil";
+                reset();
+            }
+            JOptionPane.showMessageDialog(this, pesan);
+            ec.BindingAll(TblEmployees, header);
+            
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
@@ -488,6 +511,12 @@ public class EmployeesView extends javax.swing.JFrame {
         
     }//GEN-LAST:event_TblEmployeesMouseClicked
 
+    private void txtEmployeeIDKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmployeeIDKeyPressed
+        // TODO add your handling code here:
+        btnSave.setEnabled(true);
+        btnDelete.setEnabled(true);
+    }//GEN-LAST:event_txtEmployeeIDKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -564,6 +593,16 @@ public class EmployeesView extends javax.swing.JFrame {
         txtFirstName.setText("");
         txtLastName.setText("");
         txtEmail.setText("");
+        txtPhoneNumber.setText("");
+        txtHireDate.setDate(new Date());
+        txtJobID.setText("");
+        txtSalary.setText("");
+        txtCommissionPCT.setText("");
+        txtManagerID.setText("");
+        txtDepartmentID.setText("");
+        txtEmployeeID.setEnabled(true);
+        btnSave.setEnabled(false);
+        btnDelete.setEnabled(false);
         
     }
     
