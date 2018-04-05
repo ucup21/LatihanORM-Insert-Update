@@ -105,5 +105,10 @@ public class EmployeesController {
         return edao.delete(id);
     }
 
+    public  void bindingsearch(JTable table, String[] header,
+            String category, String search){
+        BindingTabel(table, header, edao.search(category, search));
+        
+    }
 
 }

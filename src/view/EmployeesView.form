@@ -376,16 +376,20 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Search"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSearchActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="comboxSearch">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="5">
+          <StringArray count="6">
             <StringItem index="0" value="Employee ID"/>
             <StringItem index="1" value="Job ID"/>
-            <StringItem index="2" value="Manager ID"/>
+            <StringItem index="2" value="Last Name"/>
             <StringItem index="3" value="Department ID"/>
             <StringItem index="4" value="Email"/>
+            <StringItem index="5" value="Manager ID"/>
           </StringArray>
         </Property>
       </Properties>

@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
  * @author TAMU
  */
 public class EmployeesView extends javax.swing.JFrame {
-    
+
     private String header[] = {"Employee ID", "First Name", "Last Name", "Email", "Phone", "Hire Date", "Job ID", "Salary", "Commission", "Manager ID", "Department ID"};
     public EmployeesController ec;
 
@@ -26,7 +26,7 @@ public class EmployeesView extends javax.swing.JFrame {
         initComponents();
         ec = new EmployeesController();
         ec.BindingAll(TblEmployees, header);
-        
+
     }
 
     /**
@@ -318,8 +318,13 @@ public class EmployeesView extends javax.swing.JFrame {
         });
 
         btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
-        comboxSearch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Employee ID", "Job ID", "Manager ID", "Department ID", "Email" }));
+        comboxSearch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Employee ID", "Job ID", "Last Name", "Department ID", "Email", "Manager ID" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -396,11 +401,11 @@ public class EmployeesView extends javax.swing.JFrame {
         String pesan = "Gagal menambahkan data";
         if (hasil) {
             try {
-                 pesan = "Berhasil menambahkan Data";
+                pesan = "Berhasil menambahkan Data";
             } catch (Exception e) {
                 e.printStackTrace();
             }
-           
+
         }
         JOptionPane.showMessageDialog(this, pesan);
         ec.BindingAll(TblEmployees, header);
@@ -408,19 +413,19 @@ public class EmployeesView extends javax.swing.JFrame {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
-       
+
         int i = JOptionPane.showConfirmDialog(this, "Apakah Anda Yakin Ingin dihapus?");
         if (i == 0) {
             try {
-            String pesan = "Gagal hapus";
-            boolean hasil = ec.delete(txtEmployeeID.getText());
-            if (hasil) {
-                pesan = "Hore Berhasil";
-                reset();
-            }
-            JOptionPane.showMessageDialog(this, pesan);
-            ec.BindingAll(TblEmployees, header);
-            
+                String pesan = "Gagal hapus";
+                boolean hasil = ec.delete(txtEmployeeID.getText());
+                if (hasil) {
+                    pesan = "Hore Berhasil";
+                    reset();
+                }
+                JOptionPane.showMessageDialog(this, pesan);
+                ec.BindingAll(TblEmployees, header);
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -508,7 +513,9 @@ public class EmployeesView extends javax.swing.JFrame {
         txtCommissionPCT.setText("" + TblEmployees.getValueAt(TblEmployees.getSelectedRow(), 8) + "");
         txtManagerID.setText("" + TblEmployees.getValueAt(TblEmployees.getSelectedRow(), 9) + "");
         txtDepartmentID.setText("" + TblEmployees.getValueAt(TblEmployees.getSelectedRow(), 10) + "");
-        
+        btnSave.setEnabled(true);
+        btnDelete.setEnabled(true);
+
     }//GEN-LAST:event_TblEmployeesMouseClicked
 
     private void txtEmployeeIDKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmployeeIDKeyPressed
@@ -516,6 +523,34 @@ public class EmployeesView extends javax.swing.JFrame {
         btnSave.setEnabled(true);
         btnDelete.setEnabled(true);
     }//GEN-LAST:event_txtEmployeeIDKeyPressed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        String kolom = "";
+        switch (comboxSearch.getSelectedIndex()) {
+            case 0:
+                kolom = "employeeId";
+                break;
+            case 1:
+                kolom = "jobId";
+                break;
+            case 2:
+                kolom = "lastName";
+                break;
+            case 3:
+                kolom = "departmentId";
+                break;
+            case 4:
+                kolom = "email";
+                break;
+            case 5:
+                kolom = "managerId";
+                break;
+            default:
+                throw new AssertionError();
+        }
+        ec.bindingsearch(TblEmployees, header, kolom,
+                txtSearch.getText());
+    }//GEN-LAST:event_btnSearchActionPerformed
 
     /**
      * @param args the command line arguments
@@ -603,7 +638,7 @@ public class EmployeesView extends javax.swing.JFrame {
         txtEmployeeID.setEnabled(true);
         btnSave.setEnabled(false);
         btnDelete.setEnabled(false);
-        
+
     }
-    
+
 }
